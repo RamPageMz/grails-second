@@ -51,7 +51,7 @@ class TestuserController {
     }
 
     def deleteUser(){
-        def one=Testuser.findById("2")
+        def one=Testuser.findById("6")
 
         //one.delete()
 
