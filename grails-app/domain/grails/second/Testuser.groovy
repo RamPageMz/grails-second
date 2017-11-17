@@ -13,8 +13,18 @@ class Testuser {
     Integer age
 
     static constraints = {
+
+        username nullable: true
+        password nullable: true
+        age nullable: true
+
+        dateCreated nullable: true
+        lastUpdated nullable: true
+        createUser nullable: true
+        updateUser nullable: true
     }
 
     static mapping = {
+        id genetaor: 'uuid.hex'
     }
 }

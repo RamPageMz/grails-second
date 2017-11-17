@@ -14,7 +14,7 @@ class TestuserController {
     }
 
     def editUser(){
-        println("addNewUser")
+        println("editUser")
 
         def one=Testuser.last()
 
@@ -43,6 +43,8 @@ class TestuserController {
         one.dateCreated=new Date()
         one.lastUpdated=new Date()
 
+        println("one.id: "+one.id)
+
 //        one.save()
         testuserService.save(one)
 
@@ -51,7 +53,11 @@ class TestuserController {
     def deleteUser(){
         def one=Testuser.findById("2")
 
-        one.delete()
+        //one.delete()
+
+        println("111")
+
+        testuserService.delete(one)
 
     }
 

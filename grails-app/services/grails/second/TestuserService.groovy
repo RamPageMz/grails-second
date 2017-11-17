@@ -22,4 +22,12 @@ class TestuserService {
         }
     }
 
+    def delete(testuser){
+        if(!testuser.validate()) {
+            throw new ValidationException("删除失败", testuser.errors)
+        }else {
+            testuser.delete()
+        }
+    }
+
 }
