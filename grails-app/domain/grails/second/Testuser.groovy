@@ -2,7 +2,7 @@ package grails.second
 
 class Testuser {
 
-    Integer id
+    Integer id      // oracle需要设置为int型
     Date dateCreated
     Date lastUpdated
     String createUser

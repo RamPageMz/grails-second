@@ -114,7 +114,7 @@ environments:
                 maxAge: 600000
                 timeBetweenEvictionRunsMillis: 5000
                 minEvictableIdleTimeMillis: 60000
-                validationQuery: SELECT 1 from dual
+                validationQuery: SELECT 1 from dual  # oracle这么写 如果是mysql 应该是select 1
                 validationQueryTimeout: 3
                 validationInterval: 15000
                 testOnBorrow: true
