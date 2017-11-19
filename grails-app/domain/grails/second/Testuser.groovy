@@ -2,7 +2,7 @@ package grails.second
 
 class Testuser {
 
-    String id
+    Integer id
     Date dateCreated
     Date lastUpdated
     String createUser

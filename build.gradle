@@ -49,6 +49,7 @@ dependencies {
     console "org.grails:grails-console"
     profile "org.grails.profiles:web"
     runtime "mysql:mysql-connector-java:5.1.22"
+    runtime "com.oracle:ojdbc6:11.2.0.3"
     runtime "org.glassfish.web:el-impl:2.1.2-b03"
     runtime "com.h2database:h2"
     runtime "org.apache.tomcat:tomcat-jdbc"

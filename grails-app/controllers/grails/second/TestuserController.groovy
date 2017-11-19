@@ -37,9 +37,10 @@ class TestuserController {
         println("addNewUser")
 
         def one=new Testuser()
-        one.username="new 用户"
-        one.password="123密码"
-        one.age=10
+        one.id=10
+        one.username="新用户"
+        one.password="123ASD!"
+        one.age=100
         one.dateCreated=new Date()
         one.lastUpdated=new Date()
 
