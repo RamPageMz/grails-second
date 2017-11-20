@@ -25,6 +25,6 @@ class Testuser {
     }
 
     static mapping = {
-        id genetaor: 'uuid.hex'
+        //id genetaor: 'uuid.hex'
     }
 }

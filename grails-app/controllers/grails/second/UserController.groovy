@@ -11,6 +11,10 @@ class UserController {
     def index() {
         println("user index")
 
+        def one = User.first()
+
+        println(one.mz_username)
+
         def testCode="123abcABC!"
         def encode=Base64.encodeBase64(testCode.getBytes("UTF-8"))
 
@@ -26,10 +30,10 @@ class UserController {
 
     def addNewUser() {
         def user = new User()
-        user.username = "mazhen"
-        user.password = "123456"
-        user.status = 1
-        user.number = "001"
+        user.mz_username = "mazhen"
+        user.mz_password = "123456"
+        user.mz_status = 1
+        user.mz_number = "001"
 
         userService.save(user)
     }

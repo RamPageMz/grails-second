@@ -1,6 +1,7 @@
 package grails.second
 
-class User {
+class ManageUser {
+
     Integer id
     Date dateCreated
     Date lastUpdated
