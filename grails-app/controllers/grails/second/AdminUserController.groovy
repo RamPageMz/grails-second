@@ -55,8 +55,10 @@ class AdminUserController {
 
         render result as JSON
 
+    }
 
-
+    def aa(){
+        println("dashboard")
     }
 
     def addNew() {
