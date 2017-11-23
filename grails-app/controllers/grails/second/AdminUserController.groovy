@@ -8,9 +8,7 @@ class AdminUserController {
     def adminUserService
 
     def index() {
-        def one = AdminUser.first()
-
-        [firstName: one.ad_username]
+        println("login-index")
     }
 
     /**
@@ -59,6 +57,10 @@ class AdminUserController {
 
     def aa(){
         println("dashboard")
+    }
+
+    def webTwo(){
+        println("webTwo")
     }
 
     def addNew() {
