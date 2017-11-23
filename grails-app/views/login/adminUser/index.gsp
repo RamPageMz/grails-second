@@ -68,7 +68,7 @@
                 if (dData.backCode == 1 || dData.backCode == "1") {
 //                    document.getElementById("login_form").style.display="none";
 //                    while(Date.now() - start <= 3000);//休眠1秒 跳转新页面
-                    window.location.href="webTwo";
+                    window.location.href="../index/index";
                 }else {
                     document.getElementById("login_info").innerHTML = dData.backMessage;
                     $("#login_username").val("");

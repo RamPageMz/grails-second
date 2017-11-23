@@ -37,6 +37,12 @@ class AdminUserController {
             }else if (user.ad_password==params.password){
                 backCode=1
                 backMessage="登录成功"
+
+                //session记录
+                session.setAttribute("username",params.username)
+                session.setAttribute("userID",user.id)
+                session.setAttribute("userNumber",user.ad_number)
+
             }else {
                 backCode=0
                 backMessage="密码错误！"
