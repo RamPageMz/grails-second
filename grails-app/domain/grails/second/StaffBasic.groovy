@@ -30,11 +30,41 @@ class StaffBasic {//员工基本信息
     String localAddress   //本地住址
     String zipCode      //邮编
     String mobilePhone  //手机
-    String honmPhone    //家庭电话
+    String homePhone    //家庭电话
     Date hireTime       //入职时间
 
-
+    static belongsTo = [staff:Staff]
 
     static constraints = {
+        dateCreated nullable: true
+        lastUpdated nullable: true
+        createUser nullable: true
+        updateUser nullable: true
+
+        name nullable: false
+        sex nullable: false
+        origin nullable: false
+        birthday nullable: false
+        race nullable: false
+        marriage nullable: false
+        politic nullable: true
+        health nullable: true
+        education nullable: false
+        graduationTime nullable: true
+        degree nullable: false
+        graduationSchool nullable: false
+        major nullable: false
+        proTitle nullable: true
+        household nullable: true
+        identityCard nullable: true
+        householdType nullable: true
+        havaShang nullable: true
+        validityTime nullable: true
+        localAddress nullable: true
+        zipCode nullable: true
+        mobilePhone nullable: true
+        homePhone nullable: true
+        hireTime nullable: true
+
     }
 }

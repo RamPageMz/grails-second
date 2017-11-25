@@ -8,6 +8,24 @@ class StaffWork {//员工工作信息
     String createUser
     String updateUser
 
+    String timeInterval
+    String workUnit         //工作单位
+    String department       //部门
+    String duty             //职务
+    String reference        //证明人
+
+    Integer stage
+
     static constraints = {
+        dateCreated nullable: true
+        lastUpdated nullable: true
+        createUser nullable: true
+        updateUser nullable: true
+
+        timeInterval nullable: false
+        workUnit nullable: false
+        department nullable: true
+        duty nullable: true
+        reference nullable: true
     }
 }
