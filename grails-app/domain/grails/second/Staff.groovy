@@ -53,5 +53,14 @@ class Staff {//员工总表 链接到各个模块
         zongHeBaoXianTip nullable: true
         tuiGong nullable: true
         tuiGongTip nullable: true
+
+        staffBasic nullable: true
+        staffAttach nullable: true
+        staffContract nullable: true
+        staffHome nullable: true
+        staffScore nullable:  true
+        staffStudy nullable: true
+        staffWork nullable: true
+        salary nullable: true
     }
 }

@@ -32,5 +32,7 @@ class StaffAttach {//员工附件资料
         fileName nullable: true
         attachContent nullable: true
         tip nullable: true
+
+        staff nullable: true
     }
 }

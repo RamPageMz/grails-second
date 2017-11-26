@@ -36,5 +36,7 @@ class StaffContract {//员工合同信息
         addmissionTime nullable: true
         insuranceTime nullable: true
         accumulationFundTime nullable: true
+
+        staff nullable: true
     }
 }

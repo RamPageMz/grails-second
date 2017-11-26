@@ -66,5 +66,6 @@ class StaffBasic {//员工基本信息
         homePhone nullable: true
         hireTime nullable: true
 
+        staff nullable: true
     }
 }
