@@ -143,12 +143,12 @@
                         <div class="inner">
                             <h3>150</h3>
 
-                            <p>New Orders</p>
+                            <p>员工总数</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        %{--<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>--}%
                     </div>
                 </div>
                 <!-- ./col -->
@@ -158,12 +158,12 @@
                         <div class="inner">
                             <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                            <p>Bounce Rate</p>
+                            <p>男女比例</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        %{--<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>--}%
                     </div>
                 </div>
                 <!-- ./col -->
@@ -173,27 +173,12 @@
                         <div class="inner">
                             <h3>44</h3>
 
-                            <p>User Registrations</p>
+                            <p>平均薪资</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Unique Visitors</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        %{--<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>--}%
                     </div>
                 </div>
                 <!-- ./col -->
@@ -218,10 +203,9 @@
                             <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
                             <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
                         </div>
+                        %{--<canvas id="myChart" width="100%" height="100%"></canvas>--}%
                     </div>
                     <!-- /.nav-tabs-custom -->
-
-
 
                     <!-- TO DO List -->
                     <div class="box box-primary">
@@ -605,6 +589,7 @@
 %{--<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>--}%
 <asset:javascript src="jquery-ui/jquery-ui.min.js" />
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <asset:javascript src="Chart.min.js" />
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>

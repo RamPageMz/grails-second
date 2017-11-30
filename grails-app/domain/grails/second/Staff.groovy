@@ -8,10 +8,10 @@ class Staff {//员工总表 链接到各个模块
     String createUser
     String updateUser
 
-    Integer s_status      //状态 1-正常 0-不正常
+    Integer s_status      //状态 1-正常 0-不正常 2-休假
 
     String staff_number     //员工工号
-    Integer department_number   //部门编号
+    String department_number   //部门编号
     String duty             //职务
 
     Integer laoDongShouCe   // 1- 有劳动手册 0- 没有
@@ -32,6 +32,8 @@ class Staff {//员工总表 链接到各个模块
     static hasOne = [staffAttach:StaffAttach,staffBasic:StaffBasic,staffContract:StaffContract]
 
     static hasMany = [staffHome:StaffHome,staffScore:StaffScore,staffStudy:StaffStudy,staffWork:StaffWork,salary:SalaryInfo]
+
+    static belongsTo = [department:Department]
 
     static constraints = {
         dateCreated nullable: true
@@ -62,5 +64,6 @@ class Staff {//员工总表 链接到各个模块
         staffStudy nullable: true
         staffWork nullable: true
         salary nullable: true
+        department nullable: true
     }
 }

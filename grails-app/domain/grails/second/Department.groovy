@@ -11,12 +11,12 @@ class Department {
     String name
     String simpleName               //简称
     String description
-    String personInChargeNumber     //负责人工号
-    String personInChargeName       //负责人姓名
-    String personInContactNumber    //联系人工号
-    String personInContactName      //联系人姓名
+    //String personInChargeNumber     //负责人工号
+    //String personInChargeName       //负责人姓名
+    //String personInContactNumber    //联系人工号
+    //String personInContactName      //联系人姓名
 
-    static belongsTo = [upperDepartment:Department]
+    static belongsTo = [upperDepartment:Department,staffInCharge:Staff,staffInConnnect:Staff]
 
     static constraints = {
         dateCreated nullable: true
@@ -28,9 +28,8 @@ class Department {
         name nullable: true
         simpleName nullable: true
         description nullable: true
-        personInChargeName nullable: true
-        personInChargeNumber nullable: true
-        personInContactName nullable: true
-        personInContactNumber nullable: true
+        staffInCharge nullable: true
+        staffInConnnect nullable: true
+        upperDepartment nullable: true
     }
 }
