@@ -29,11 +29,11 @@ class Staff {//员工总表 链接到各个模块
 
     // staff 与 staffBasic staffAttach staffContract staffHome 一对一
 
-    static hasOne = [staffAttach:StaffAttach,staffBasic:StaffBasic,staffContract:StaffContract]
+//    static hasOne = [staffAttach:StaffAttach,staffBasic:StaffBasic,staffContract:StaffContract]
 
     static hasMany = [staffHome:StaffHome,staffScore:StaffScore,staffStudy:StaffStudy,staffWork:StaffWork,salary:SalaryInfo]
 
-    static belongsTo = [department:Department]
+    static belongsTo = [department:Department,staffAttach:StaffAttach,staffBasic:StaffBasic,staffContract:StaffContract]
 
     static constraints = {
         dateCreated nullable: true

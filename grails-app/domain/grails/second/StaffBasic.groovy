@@ -33,7 +33,8 @@ class StaffBasic {//员工基本信息
     String homePhone    //家庭电话
     Date hireTime       //入职时间
 
-    static belongsTo = [staff:Staff]
+//    static belongsTo = [staff:Staff]
+    static hasOne = [staff:Staff]
 
     static constraints = {
         dateCreated nullable: true
@@ -65,7 +66,6 @@ class StaffBasic {//员工基本信息
         mobilePhone nullable: true
         homePhone nullable: true
         hireTime nullable: true
-
         staff nullable: true
     }
 }

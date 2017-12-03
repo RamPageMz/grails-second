@@ -19,7 +19,7 @@ class StaffContract {//员工合同信息
     Date insuranceTime          //办理保险时间
     Date accumulationFundTime   //办理公积金时间
 
-    static belongsTo = [staff:Staff]
+//    static belongsTo = [staff:Staff]
 
     static constraints = {
         dateCreated nullable: true
@@ -36,7 +36,5 @@ class StaffContract {//员工合同信息
         addmissionTime nullable: true
         insuranceTime nullable: true
         accumulationFundTime nullable: true
-
-        staff nullable: true
     }
 }

@@ -17,7 +17,7 @@ class StaffAttach {//员工附件资料
     String attachContent
     String tip
 
-    static belongsTo = [staff:Staff]
+//    static belongsTo = [staff:Staff]
 
     static constraints = {
         dateCreated nullable: true
@@ -32,7 +32,5 @@ class StaffAttach {//员工附件资料
         fileName nullable: true
         attachContent nullable: true
         tip nullable: true
-
-        staff nullable: true
     }
 }

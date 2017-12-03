@@ -151,8 +151,8 @@ class TestDomainActionController {
         department.name=name
         department.simpleName=name
         department.description="nothing"
-        department.staffInConnnect=Staff.first()
-        department.staffInCharge=Staff.first()
+//        department.staffInConnnect=Staff.first()
+//        department.staffInCharge=Staff.first()
 
         departmentService.save(department)
     }
@@ -205,8 +205,11 @@ class TestDomainActionController {
         basic.homePhone="0512-85206264"
         basic.hireTime=new Date()
 
-        basic.staff=staff
+        //basic.staff=staff
         staffBasicService.save(basic)
+
+        staff.staffBasic=basic
+        staffService.save(staff)
 
         def home=new StaffHome()
         home.stage=1

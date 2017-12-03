@@ -72,7 +72,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">导航菜单</li>
-                <li><a href=""><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+                <li><a href="../index/index"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-files-o"></i>
@@ -83,7 +83,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 部门简介</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 信息维护</a></li>
+                        <li><a href="../department/index"><i class="fa fa-circle-o"></i> 信息维护</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -95,7 +95,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 信息管理</a></li>
+                        <li><a href="../staff/index"><i class="fa fa-circle-o"></i> 信息管理</a></li>
                         <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Excel导入/导出</a></li>
                     </ul>
                 </li>
