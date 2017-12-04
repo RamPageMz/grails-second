@@ -45,7 +45,7 @@ class StaffController {
                 eq('department_number',params.departmentCode)
             }
             if (params.staffNumber){
-                eq('staff_number',params.staffNumber)
+                like('staff_number',"%${params.staffNumber}%")
             }
             if (params.duty){
                 eq('duty',params.duty)
@@ -63,6 +63,56 @@ class StaffController {
         }
 
         render(template: "/${namespace}/${params.controller}/searchList", model:[searchList:staffList])
+    }
+
+    def showStaffDetail(){
+        println("showStaffDetail:"+params)
+
+        def staff=Staff.findByStaff_number(params.staffNumber)
+
+        def staffBasic=staff?.staffBasic
+        def staffAttach=staff?.staffAttach
+        def staffContract=staff?.staffContract
+        def staffHome=staff?.staffHome.sort {   a,b->
+            if (a.lover<b.lover)
+                return 1
+            else
+                return -1
+
+        }
+        def staffWork=staff?.staffWork.sort {   a,b->
+            if (a.timeInterval < b.timeInterval)
+                return 1
+            else
+                return -1
+
+        }
+        def staffStudy=staff?.staffStudy.sort {   a,b->
+            if (a.timeInterval < b.timeInterval)
+                return 1
+            else
+                return -1
+        }
+
+        def staffScore=staff?.staffScore.sort { a,b->
+            if (a.scoreTime < b.scoreTime)
+                return 1
+            else
+                return -1
+        }
+
+        println("attach:"+staffAttach)
+        println("basic:"+staffBasic)
+        println("contract:"+staffContract)
+        println("home:"+staffHome)
+        println("score:"+staffScore)
+        println("study:"+staffStudy)
+        println("work:"+staffWork)
+
+        render(template: "/${namespace}/${params.controller}/detail",
+                model:[staff:staff,staffDuty:DutyCode.findByCodeKey(staff.duty).codeValue,
+                       staffAttach:staffAttach,staffBasic:staffBasic,staffContract:staffContract,
+                staffHome:staffHome,staffScore:staffScore,staffStudy:staffStudy,staffWork:staffWork])
     }
 
     /**

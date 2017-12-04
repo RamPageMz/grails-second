@@ -9,7 +9,7 @@ class TestDomainActionController {
     def index() {
         println("test Domain action ...")
 
-        createDepartment('A01',"A市场部")
+        /*createDepartment('A01',"A市场部")
         createDepartment('A02',"A人事部")
         createDepartment('A03',"A研发部")
         createDepartment('A04',"A运营部")
@@ -24,7 +24,7 @@ class TestDomainActionController {
         createStaffWithName("S007",'A02','总监','马镇7')
         createStaffWithName("S008",'A03','总监','马镇8')
         createStaffWithName("S009",'A04','总监','马镇9')
-
+*/
     }
 
     def createStaff(){

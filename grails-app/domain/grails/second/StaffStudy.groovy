@@ -28,8 +28,8 @@ class StaffStudy {//员工学习经历
         timeInterval nullable: false
         school nullable: true
         major nullable: true
-        duty nullable: false
+        duty nullable: true
         reference nullable: true
-        stage nullable: false
+        stage nullable: true
     }
 }

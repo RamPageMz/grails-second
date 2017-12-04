@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             <g:each in="${searchList}">
-                <tr>
+                <tr onclick="showStaffDetail('${it?.staff_number}')">
                     <td>${it?.staff_number}</td>
                     <td>${it?.staffBasic?.name}</td>
                     <td>${it?.department_number}</td>
@@ -34,15 +34,6 @@
                 </tr>
             </g:each>
         </tbody>
-        %{--<tfoot>
-        <tr>
-            <th>Rendering engine</th>
-            <th>Browser</th>
-            <th>Platform(s)</th>
-            <th>Engine version</th>
-            <th>CSS grade</th>
-        </tr>
-        </tfoot>--}%
     </table>
 
     <asset:javascript src="jquery/dist/jquery.min.js" />
@@ -65,6 +56,13 @@
                 'info'        : true,
                 'autoWidth'   : false
             })
-        })
+        });
+
+        function showStaffDetail(staffNumber) {
+            console.log('aa:'+staffNumber);
+            $.post("/staff/showStaffDetail",{staffNumber:staffNumber}, function(data) {
+                $("#detailTemplate").html(data);
+            }, "html");
+        }
     </script>
 </div>
