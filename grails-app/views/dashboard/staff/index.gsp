@@ -215,11 +215,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7 col-md-offset-2">
+                        <div class="col-md-4 ">
                             <div class="form-group">
                                 <label></label>
-                                <div class="input-group col-md-3 col-md-offset-2" style="margin-top: 5px;">
+                                <div class="input-group col-md-5 col-md-offset-3" style="margin-top: 5px;">
                                     <button type="button" class="btn btn-block btn-info" onclick="searchInfo()">查询</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label></label>
+                                <div class="input-group col-md-5" style="margin-top: 5px;">
+                                    <button type="button" class="btn btn-block btn-info" onclick="window.location.href='/staff/createStaff';">新建</button>
                                 </div>
                             </div>
                         </div>

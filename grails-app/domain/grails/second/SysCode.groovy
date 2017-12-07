@@ -9,7 +9,7 @@ class SysCode {
 
     Integer codeKey
     String codeValue
-    String type
+    String type             // politic marriage education degree household health
     String tip
 
     static constraints = {

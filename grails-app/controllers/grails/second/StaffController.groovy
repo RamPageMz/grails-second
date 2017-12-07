@@ -115,6 +115,10 @@ class StaffController {
                 staffHome:staffHome,staffScore:staffScore,staffStudy:staffStudy,staffWork:staffWork])
     }
 
+    def createStaff(){
+        println("createStaff:")
+    }
+
     /**
      *  Method Name : showAllStaffList
      *  Description : 显示所有的员工  暂定为员工编号排序
