@@ -1,5 +1,12 @@
 package grails.second
 
+import org.apache.poi.ss.usermodel.Row
+import org.apache.poi.xssf.usermodel.XSSFCell
+import org.apache.poi.xssf.usermodel.XSSFRow
+import org.apache.poi.xssf.usermodel.XSSFSheet
+import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import java.io.*
+
 class TestDomainActionController {
     def staffService
     def staffBasicService
@@ -8,6 +15,31 @@ class TestDomainActionController {
 
     def index() {
         println("test Domain action ...")
+
+        def filePath="I:\\file\\excel\\test.xlsx"
+
+        File file=new File(filePath)
+        FileInputStream inputStream=new FileInputStream(file)
+        XSSFWorkbook workbook =new XSSFWorkbook(inputStream)
+
+//        workbook.setMissingCellPolicy(Row.CREATE_NULL_AS_BLANK)
+
+        XSSFSheet sheet=workbook.getSheetAt(0)
+
+        sheet.eachWithIndex { Row entry, int i ->
+            println("i-"+i)
+            if(i > 0){
+                def cells=entry.physicalNumberOfCells
+                println("cells-"+cells)
+                println("0:"+entry.getCell(0).toString())
+                println("1:"+entry.getCell(1).toString())
+                println("2:"+entry.getCell(2).toString())
+                println("3:"+entry.getCell(3).toString())
+            }
+            println("**********")
+        }
+
+
 
         /*createDepartment('A01',"A市场部")
         createDepartment('A02',"A人事部")

@@ -1,16 +1,24 @@
 package grails.second
 
+import grails.converters.JSON
+import org.apache.poi.ss.usermodel.Row
+import org.apache.poi.xssf.usermodel.XSSFCell
+import org.apache.poi.xssf.usermodel.XSSFSheet
+import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import org.springframework.web.multipart.MultipartHttpServletRequest
+
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class StaffController {
     static namespace = "dashboard"
+    def webRootDir = "I:\\file"
 
     def index() {
-        def dutyList=DutyCode.all
-        def departmentList=Department.all
+        def dutyList = DutyCode.all
+        def departmentList = Department.all
 
-        [dutyList:dutyList,departmentList:departmentList]
+        [dutyList: dutyList, departmentList: departmentList]
 //        def staff=Staff.first()
 //        println(staff.department.name)
 //        println(staff.staffBasic.name)
@@ -28,95 +36,192 @@ class StaffController {
 //        println(ss)
     }
 
-    def searchPage(){
-        println("searchPage..."+params)
+    def searchPage() {
+        println("searchPage..." + params)
 
         Date startDate
         Date endDate
 
-        if (params.hireTime1&&params.hireTime2) {
+        if (params.hireTime1 && params.hireTime2) {
             DateFormat format = new SimpleDateFormat("YYYY-MM-DD")
             startDate = format.parse(params.hireTime1)
             endDate = format.parse(params.hireTime2)
         }
 
-        def staffList=Staff.createCriteria().list {
-            if (params.departmentCode){
-                eq('department_number',params.departmentCode)
+        def staffList = Staff.createCriteria().list {
+            if (params.departmentCode) {
+                eq('department_number', params.departmentCode)
             }
-            if (params.staffNumber){
-                like('staff_number',"%${params.staffNumber}%")
+            if (params.staffNumber) {
+                like('staff_number', "%${params.staffNumber}%")
             }
-            if (params.duty){
-                eq('duty',params.duty)
+            if (params.duty) {
+                eq('duty', params.duty)
             }
-            if (params.name){
-                staffBasic{
-                    like('name',"%${params.name}%")
+            if (params.name) {
+                staffBasic {
+                    like('name', "%${params.name}%")
                 }
             }
-            if (params.hireTime1&&params.hireTime2){
-                staffBasic{
-                    between('hireTime',startDate,endDate)
+            if (params.hireTime1 && params.hireTime2) {
+                staffBasic {
+                    between('hireTime', startDate, endDate)
                 }
             }
         }
 
-        render(template: "/${namespace}/${params.controller}/searchList", model:[searchList:staffList])
+        render(template: "/${namespace}/${params.controller}/searchList", model: [searchList: staffList])
     }
 
-    def showStaffDetail(){
-        println("showStaffDetail:"+params)
+    def showStaffDetail() {
+        println("showStaffDetail:" + params)
 
-        def staff=Staff.findByStaff_number(params.staffNumber)
+        def staff = Staff.findByStaff_number(params.staffNumber)
 
-        def staffBasic=staff?.staffBasic
-        def staffAttach=staff?.staffAttach
-        def staffContract=staff?.staffContract
-        def staffHome=staff?.staffHome.sort {   a,b->
-            if (a.lover<b.lover)
+        def staffBasic = staff?.staffBasic
+        def staffAttach = staff?.staffAttach
+        def staffContract = staff?.staffContract
+        def staffHome = staff?.staffHome.sort { a, b ->
+            if (a.lover < b.lover)
                 return 1
             else
                 return -1
 
         }
-        def staffWork=staff?.staffWork.sort {   a,b->
+        def staffWork = staff?.staffWork.sort { a, b ->
             if (a.timeInterval < b.timeInterval)
                 return 1
             else
                 return -1
 
         }
-        def staffStudy=staff?.staffStudy.sort {   a,b->
+        def staffStudy = staff?.staffStudy.sort { a, b ->
             if (a.timeInterval < b.timeInterval)
                 return 1
             else
                 return -1
         }
 
-        def staffScore=staff?.staffScore.sort { a,b->
+        def staffScore = staff?.staffScore.sort { a, b ->
             if (a.scoreTime < b.scoreTime)
                 return 1
             else
                 return -1
         }
 
-        println("attach:"+staffAttach)
-        println("basic:"+staffBasic)
-        println("contract:"+staffContract)
-        println("home:"+staffHome)
-        println("score:"+staffScore)
-        println("study:"+staffStudy)
-        println("work:"+staffWork)
+        println("attach:" + staffAttach)
+        println("basic:" + staffBasic)
+        println("contract:" + staffContract)
+        println("home:" + staffHome)
+        println("score:" + staffScore)
+        println("study:" + staffStudy)
+        println("work:" + staffWork)
 
         render(template: "/${namespace}/${params.controller}/detail",
-                model:[staff:staff,staffDuty:DutyCode.findByCodeKey(staff.duty).codeValue,
-                       staffAttach:staffAttach,staffBasic:staffBasic,staffContract:staffContract,
-                staffHome:staffHome,staffScore:staffScore,staffStudy:staffStudy,staffWork:staffWork])
+                model: [staff      : staff, staffDuty: DutyCode.findByCodeKey(staff.duty).codeValue,
+                        staffAttach: staffAttach, staffBasic: staffBasic, staffContract: staffContract,
+                        staffHome  : staffHome, staffScore: staffScore, staffStudy: staffStudy, staffWork: staffWork])
     }
 
-    def createStaff(){
+    def createStaff() {
         println("createStaff:")
+    }
+
+    def saveFile() {
+        def url = params.myFile
+        println(url)
+
+        def f = request.getFile('myFile')
+        if (!f.empty) {
+            def webRootDir = servletContext.getRealPath("/")
+            println webRootDir
+            def userDir = new File(webRootDir, "/payload/")
+            userDir.mkdirs()
+            f.transferTo(new File(userDir, f.originalFilename))
+        }
+
+        def result = ["backCode": "1", "backMessage": "ok!"]
+
+        render result as JSON
+    }
+
+    def uploadFile() {
+        def url = params.myFile
+        println(url)
+
+        def f = request.getFile('myFile')
+        if (!f.empty) {
+            def userDir = new File(webRootDir, "/excel/")
+            userDir.mkdirs()
+            f.transferTo(new File(userDir, f.originalFilename))
+        }
+
+        println("uploadFile success!")
+
+        redirect(action: "excelInformation", params: [filename: f.originalFilename])
+
+    }
+
+    def excelImport() {
+        println("excelImport page:")
+    }
+
+    def excelInformation() {
+        println("excelInformation page: file:${params.filename}")
+
+        def searchList=[]
+        def entryList=[:]
+
+        def filePath = webRootDir + "\\excel\\" + params.filename
+
+        File file = new File(filePath)
+        FileInputStream inputStream = new FileInputStream(file)
+        XSSFWorkbook workbook = new XSSFWorkbook(inputStream)
+
+        XSSFSheet sheet = workbook.getSheetAt(0)
+
+        sheet.eachWithIndex { Row entry, int i ->
+            if (i > 0) {
+                entryList=['key':'value']
+//                def cells = entry.physicalNumberOfCells
+                entryList.put("name",getCellVal(entry.getCell(0)))
+                entryList.put("department",getCellVal(entry.getCell(1)))
+                entryList.put("duty",getCellVal(entry.getCell(2)))
+                entryList.put("card",getCellVal(entry.getCell(3)))
+                entryList.put("birth",getCellVal(entry.getCell(6)))
+                entryList.put("hire",getCellVal(entry.getCell(19)))
+
+                println(entryList)
+
+                searchList.add(entryList)
+            }
+            println("**********")
+        }
+        println("searchList")
+        println(searchList)
+        [searchList: searchList]
+    }
+
+    def getCellVal(cell){
+        if (cell.getCellType() == XSSFCell.CELL_TYPE_BLANK) {
+            return ""
+        } else if (cell.getCellType() == XSSFCell.CELL_TYPE_BOOLEAN) {
+            return cell.getBooleanCellValue()
+        } else if (cell.getCellType() == XSSFCell.CELL_TYPE_ERROR) {
+            return cell.getErrorCellValue()
+        } else if (cell.getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
+            return cell.getNumericCellValue()
+        } else if (cell.getCellType() == XSSFCell.CELL_TYPE_STRING) {
+            return cell.getStringCellValue()
+        } else {
+            return cell.getStringCellValue()
+        }
+    }
+
+    def getDateCell(cell){
+        Date date = cell.getDateCellValue();
+        def format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date)
     }
 
     /**
@@ -126,14 +231,14 @@ class StaffController {
      *  Return      :
      *  Date        : 2017/11/30 14:51
      */
-    def showAllStaffList(){
+    def showAllStaffList() {
         println("Staff List:")
 
-        def staffList=Staff.createCriteria().list {
-            order("staff_number","asc")
+        def staffList = Staff.createCriteria().list {
+            order("staff_number", "asc")
         }
 
-        [staffList:staffList]
+        [staffList: staffList]
     }
 
     /**
@@ -143,24 +248,24 @@ class StaffController {
      *  Return      :
      *  Date        : 2017/11/30 14:56
      */
-    def searchStaffList(){
-        println("searchStaffList: params:"+params)
+    def searchStaffList() {
+        println("searchStaffList: params:" + params)
 
-        def staffList=Staff.createCriteria().list {
-            if (params.departmentCode){
-                eq('department_number',params.departmentCode)
+        def staffList = Staff.createCriteria().list {
+            if (params.departmentCode) {
+                eq('department_number', params.departmentCode)
             }
-            if (params.staffNumber){
-                eq('staff_number',params.staffNumber)
+            if (params.staffNumber) {
+                eq('staff_number', params.staffNumber)
             }
-            if (params.duty){
-                eq('duty',params.duty)
+            if (params.duty) {
+                eq('duty', params.duty)
             }
-            if (params.name){
-                eq('staffBasic.name',params.name)
+            if (params.name) {
+                eq('staffBasic.name', params.name)
             }
-            if (params.hireTime1&&params.hireTime2){
-                between('hireTime',params.hireTime1,params.hireTime2)
+            if (params.hireTime1 && params.hireTime2) {
+                between('hireTime', params.hireTime1, params.hireTime2)
             }
         }
 
@@ -175,14 +280,13 @@ class StaffController {
      *  Return      :
      *  Date        : 2017/11/30 15:16
      */
-    def showStaffAllInfo(){
-        println('showStaffAllInfo: params:'+params)
+    def showStaffAllInfo() {
+        println('showStaffAllInfo: params:' + params)
 
-        def staffInfo=Staff.findByStaff_number(params.staffNumber)
+        def staffInfo = Staff.findByStaff_number(params.staffNumber)
 
-        [staff:staffInfo]
+        [staff: staffInfo]
     }
-
 
 
 }

@@ -97,7 +97,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../staff/index"><i class="fa fa-circle-o"></i> 信息管理</a></li>
-                        <li><a href="../staff/excelImport"><i class="fa fa-circle-o"></i> Excel导入/导出</a></li>
+                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Excel导入/导出</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

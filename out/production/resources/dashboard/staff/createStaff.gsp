@@ -98,7 +98,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../staff/index"><i class="fa fa-circle-o"></i> 信息管理</a></li>
-                        <li><a href="../staff/excelImport"><i class="fa fa-circle-o"></i> Excel导入/导出</a></li>
+                        <li><a href=""><i class="fa fa-circle-o"></i> Excel导入/导出</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -541,17 +541,6 @@
                     <form id="familyForm" name="familyForm">
                     %{--<div class="row">--}%
                     <div id="loverDiv">
-
-                        <g:uploadForm action="saveFile" method="post">
-                            <input type="file" id="fileLoad" name="fileLoad"/>
-                            <input type="submit" value="sub" />
-                        </g:uploadForm>
-                        <g:form controller="staff" action="saveFile" method="post" enctype="multipart/form-data">
-                            <input type="file" name="myFile" />
-                            <input type="submit" value="上&nbsp;&nbsp;&nbsp;传" />
-                        </g:form>
-                        <button onclick="saveFile()">upload</button>
-                    <!-- /.col -->
                         <strong><i class="fa  fa-venus-double"></i>&nbsp;配偶信息</strong><i class="fa  fa-plus-square-o" style="margin-left: 20px;" onclick="showLoverDiv()"></i>
                         <div id="loverDetail" style="margin-top: 10px;display: none;">
                             <div class="row">
@@ -1422,9 +1411,6 @@
             $.each($('#basicForm').serializeArray(), function(i, field){
                 console.log(field.name + ":" + field.value + " ");
             });
-            /*$.post("/staff/saveFile",$('#basicForm').serializeArray(), function(data) {
-                console.log(data.backMessage)
-            }, "json");*/
         }
 
         function addFamily(){
@@ -1440,12 +1426,6 @@
         function saveFamily(){
             console.log("saveFamily...");
             console.log($('#familyForm').serializeArray());
-        }
-
-        function saveFile(){
-            $.post("/staff/saveFile",$('#fileLoad').val(), function(data) {
-                console.log(data.backMessage)
-            }, "json");
         }
 
 
