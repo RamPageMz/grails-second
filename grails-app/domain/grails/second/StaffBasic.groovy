@@ -42,19 +42,19 @@ class StaffBasic {//员工基本信息
         createUser nullable: true
         updateUser nullable: true
 
-        name nullable: false
-        sex nullable: false
-        origin nullable: false
-        birthday nullable: false
-        race nullable: false
-        marriage nullable: false
+        name nullable: true
+        sex nullable: true
+        origin nullable: true
+        birthday nullable: true
+        race nullable: true
+        marriage nullable: true
         politic nullable: true
         health nullable: true
-        education nullable: false
+        education nullable: true
         graduationTime nullable: true
-        degree nullable: false
-        graduationSchool nullable: false
-        major nullable: false
+        degree nullable: true
+        graduationSchool nullable: true
+        major nullable: true
         proTitle nullable: true
         household nullable: true
         identityCard nullable: true

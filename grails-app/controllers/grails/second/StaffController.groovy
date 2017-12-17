@@ -14,6 +14,10 @@ class StaffController {
     static namespace = "dashboard"
     def webRootDir = "I:\\file"
 
+    def staffService
+    def staffBasicService
+    def contractService
+
     def index() {
         def dutyList = DutyCode.all
         def departmentList = Department.all
@@ -184,12 +188,115 @@ class StaffController {
             if (i > 0) {
                 entryList=['key':'value']
 //                def cells = entry.physicalNumberOfCells
-                entryList.put("name",getCellVal(entry.getCell(0)))
-                entryList.put("department",getCellVal(entry.getCell(1)))
-                entryList.put("duty",getCellVal(entry.getCell(2)))
-                entryList.put("card",getCellVal(entry.getCell(3)))
-                entryList.put("birth",getCellVal(entry.getCell(6)))
-                entryList.put("hire",getCellVal(entry.getCell(19)))
+
+                def name=getCellVal(entry.getCell(0)).toString()       //姓名
+                def department=getCellVal(entry.getCell(1)).toString()
+                def duty=getCellVal(entry.getCell(2)).toString()
+                def card=getCellVal(entry.getCell(3)).toString()
+                def sex=getCellVal(entry.getCell(4)).toString()
+                def politic=getCellVal(entry.getCell(5)).toString()
+                def birth=getCellVal(entry.getCell(6)).toString()
+                def education=getCellVal(entry.getCell(7)).toString()  //学历
+                def degree=getCellVal(entry.getCell(8)).toString()     //学位
+                def graduationDate=getCellVal(entry.getCell(9)).toString()
+                def graduationSchool=getCellVal(entry.getCell(10)).toString()
+                def major=getCellVal(entry.getCell(11)).toString()
+                def title=getCellVal(entry.getCell(12)).toString()
+                def origin=getCellVal(entry.getCell(13)).toString()
+                def originAddress=getCellVal(entry.getCell(14)).toString()
+                def contackAddress=getCellVal(entry.getCell(15)).toString()
+                def zipCode=getCellVal(entry.getCell(16)).toString()
+                def phone=getCellVal(entry.getCell(17)).toString()
+                def homePhone=getCellVal(entry.getCell(18)).toString()
+                def hireTime=getCellVal(entry.getCell(19)).toString()
+                def contactType=getCellVal(entry.getCell(20)).toString()
+                def contactNo=getCellVal(entry.getCell(21)).toString()
+                def contactBegin=getCellVal(entry.getCell(22)).toString()
+                def contactEnd=getCellVal(entry.getCell(23)).toString()
+                def profileAddress=getCellVal(entry.getCell(24)).toString()
+                def laoDongShouCe=getCellVal(entry.getCell(25)).toString()
+                def luYongShouXuTime=getCellVal(entry.getCell(26)).toString()
+                def ensuranceTime=getCellVal(entry.getCell(27)).toString()
+                def gongJiJinTime=getCellVal(entry.getCell(28)).toString()
+                def fireTime=getCellVal(entry.getCell(29)).toString()
+
+                def staff=new Staff()
+                def staffBasic=new StaffBasic()
+                def contract=new Contract()
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyy.MM.dd")
+
+                staffBasic.name=name
+
+                def departmentDomain=Department.findByNameOrSimpleName(department,department)
+                staff.department_number=departmentDomain.departmentCode
+                staff.department=departmentDomain
+
+                staff.duty=duty
+
+                staffBasic.identityCard=card
+
+                if (sex=='男')
+                    staffBasic.sex=1
+                else
+                    staffBasic.sex=0
+
+                def politicInt=SysCode.findByTypeAndCodeValue('politic',politic)?.codeKey
+                if (politicInt!=null)
+                    staffBasic.politic=politicInt
+                else
+                    staffBasic.politic=2//其他
+
+                staffBasic.birthday=birth
+
+                def educationInt=SysCode.findByTypeAndCodeValue('education',education)?.codeKey
+                if (educationInt!=null)
+                    staffBasic.education=educationInt
+                else
+                    staffBasic.education=8//其他
+
+                def degreeInt=SysCode.findByTypeAndCodeValue('degree',degree)?.codeKey
+                if (degreeInt!=null)
+                    staffBasic.degree=degreeInt
+                else
+                    staffBasic.degree=3//其他
+
+                staffBasic.graduationTime=sdf.parse(graduationDate)
+                staffBasic.graduationSchool=graduationSchool
+                staffBasic.major=major
+                staffBasic.proTitle=title
+                staffBasic.origin=origin
+                staffBasic.zipCode=zipCode
+                staffBasic.mobilePhone=phone
+                staffBasic.homePhone=homePhone
+                staffBasic.hireTime=sdf.parse(hireTime)
+                contract.contractType=contactType
+                contract.contractNumber=contactNo
+                contract.beginTime=sdf.parse(contactBegin)
+                contract.endTime=sdf.parse(contactEnd)
+                contract.profileAddress=profileAddress
+                staff.laoDongShouCe=1
+                staff.laoDongShouCeTip=laoDongShouCe
+                staff.zongHeBaoXian=1
+                staff.zongHeBaoXianTip=ensuranceTime
+                staff.gongJiJin=1
+                staff.gongJiJinTip=gongJiJinTime
+
+                def staff_number=departmentDomain.departmentCode+(new Random().nextInt(1000)).toString()
+                staff.staff_number=staff_number
+
+                staff.staffBasic=staffBasic
+                contract.staff=staff
+
+                staffBasicService.save(staffBasic)
+                staffService.save(staff)
+                contractService.save(contract)
+
+                entryList.put("name",name)
+                entryList.put("department",department)
+                entryList.put("duty",duty)
+                entryList.put("card",card)
+                entryList.put("birth",birth)
+                entryList.put("hire",hireTime)
 
                 println(entryList)
 
@@ -219,8 +326,8 @@ class StaffController {
     }
 
     def getDateCell(cell){
-        Date date = cell.getDateCellValue();
-        def format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = cell.getDateCellValue()
+        def format = new SimpleDateFormat("yyyy-MM-dd")
         return format.format(date)
     }
 
