@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.springframework.web.multipart.MultipartHttpServletRequest
 
 import java.text.DateFormat
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 
 class StaffController {
@@ -189,36 +190,36 @@ class StaffController {
                 entryList=['key':'value']
 //                def cells = entry.physicalNumberOfCells
 
-                def name=getCellVal(entry.getCell(0)).toString()       //姓名
-                def department=getCellVal(entry.getCell(1)).toString()
-                def duty=getCellVal(entry.getCell(2)).toString()
-                def card=getCellVal(entry.getCell(3)).toString()
-                def sex=getCellVal(entry.getCell(4)).toString()
-                def politic=getCellVal(entry.getCell(5)).toString()
-                def birth=getCellVal(entry.getCell(6)).toString()
-                def education=getCellVal(entry.getCell(7)).toString()  //学历
-                def degree=getCellVal(entry.getCell(8)).toString()     //学位
-                def graduationDate=getCellVal(entry.getCell(9)).toString()
-                def graduationSchool=getCellVal(entry.getCell(10)).toString()
-                def major=getCellVal(entry.getCell(11)).toString()
-                def title=getCellVal(entry.getCell(12)).toString()
-                def origin=getCellVal(entry.getCell(13)).toString()
-                def originAddress=getCellVal(entry.getCell(14)).toString()
-                def contackAddress=getCellVal(entry.getCell(15)).toString()
-                def zipCode=getCellVal(entry.getCell(16)).toString()
-                def phone=getCellVal(entry.getCell(17)).toString()
-                def homePhone=getCellVal(entry.getCell(18)).toString()
-                def hireTime=getCellVal(entry.getCell(19)).toString()
-                def contactType=getCellVal(entry.getCell(20)).toString()
-                def contactNo=getCellVal(entry.getCell(21)).toString()
-                def contactBegin=getCellVal(entry.getCell(22)).toString()
-                def contactEnd=getCellVal(entry.getCell(23)).toString()
-                def profileAddress=getCellVal(entry.getCell(24)).toString()
-                def laoDongShouCe=getCellVal(entry.getCell(25)).toString()
-                def luYongShouXuTime=getCellVal(entry.getCell(26)).toString()
-                def ensuranceTime=getCellVal(entry.getCell(27)).toString()
-                def gongJiJinTime=getCellVal(entry.getCell(28)).toString()
-                def fireTime=getCellVal(entry.getCell(29)).toString()
+                def name=getCellVal(entry.getCell(0))      //姓名
+                def department=getCellVal(entry.getCell(1))
+                def duty=getCellVal(entry.getCell(2))
+                def card=getCellVal(entry.getCell(3))
+                def sex=getCellVal(entry.getCell(4))
+                def politic=getCellVal(entry.getCell(5))
+                def birth=getCellVal(entry.getCell(6))
+                def education=getCellVal(entry.getCell(7))  //学历
+                def degree=getCellVal(entry.getCell(8))    //学位
+                def graduationDate=getCellVal(entry.getCell(9))
+                def graduationSchool=getCellVal(entry.getCell(10))
+                def major=getCellVal(entry.getCell(11))
+                def title=getCellVal(entry.getCell(12))
+                def origin=getCellVal(entry.getCell(13))
+                def originAddress=getCellVal(entry.getCell(14))
+                def contackAddress=getCellVal(entry.getCell(15))
+                def zipCode=getCellVal(entry.getCell(16))
+                def phone=getCellVal(entry.getCell(17))
+                def homePhone=getCellVal(entry.getCell(18))
+                def hireTime=getCellVal(entry.getCell(19))
+                def contactType=getCellVal(entry.getCell(20))
+                def contactNo=getCellVal(entry.getCell(21))
+                def contactBegin=getCellVal(entry.getCell(22))
+                def contactEnd=getCellVal(entry.getCell(23))
+                def profileAddress=getCellVal(entry.getCell(24))
+                def laoDongShouCe=getCellVal(entry.getCell(25))
+                def luYongShouXuTime=getCellVal(entry.getCell(26))
+                def ensuranceTime=getCellVal(entry.getCell(27))
+                def gongJiJinTime=getCellVal(entry.getCell(28))
+                def fireTime=getCellVal(entry.getCell(29))
 
                 def staff=new Staff()
                 def staffBasic=new StaffBasic()
@@ -317,7 +318,8 @@ class StaffController {
         } else if (cell.getCellType() == XSSFCell.CELL_TYPE_ERROR) {
             return cell.getErrorCellValue()
         } else if (cell.getCellType() == XSSFCell.CELL_TYPE_NUMERIC) {
-            return cell.getNumericCellValue()
+            DecimalFormat decimalFormat=new DecimalFormat("#.#")
+            return decimalFormat.format(cell.getNumericCellValue())
         } else if (cell.getCellType() == XSSFCell.CELL_TYPE_STRING) {
             return cell.getStringCellValue()
         } else {

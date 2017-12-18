@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.*
+import java.text.DecimalFormat
 
 class TestDomainActionController {
     def staffService
@@ -16,7 +17,8 @@ class TestDomainActionController {
     def index() {
         println("test Domain action ...")
 
-        def filePath="I:\\file\\excel\\test.xlsx"
+        def filePath="I:\\file\\exceltest\\test.xlsx"
+        DecimalFormat decimalFormat=new DecimalFormat("#.#")
 
         File file=new File(filePath)
         FileInputStream inputStream=new FileInputStream(file)
@@ -33,12 +35,12 @@ class TestDomainActionController {
                 println("cells-"+cells)
                 println("0:"+entry.getCell(0).toString())
                 println("1:"+entry.getCell(1).toString())
-                println("2:"+entry.getCell(2).toString())
+                println("2:"+decimalFormat.format(entry.getCell(2).getNumericCellValue()))
                 println("3:"+entry.getCell(3).toString())
             }
             println("**********")
         }
-
+        println(XSSFCell.CELL_TYPE_NUMERIC)
 
 
         /*createDepartment('A01',"A市场部")
