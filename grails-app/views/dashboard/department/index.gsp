@@ -10,7 +10,12 @@
     <asset:stylesheet src="Ionicons/css/ionicons.min.css" />
     <asset:stylesheet src="dist/css/AdminLTE.min.css" />
     <asset:stylesheet src="dist/css/skins/_all-skins.min.css" />
-    <asset:stylesheet src="datatables.net-bs/css/dataTables.bootstrap.min.css" />
+    <asset:stylesheet src="bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
+    <asset:stylesheet src="bootstrap-daterangepicker/daterangepicker.css" />
+    <asset:stylesheet src="bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
+    <asset:stylesheet src="timepicker/bootstrap-timepicker.css" />
+    <asset:stylesheet src="iCheck/all.css" />
+    <asset:stylesheet src="select2/dist/css/select2.min.css" />
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -78,8 +83,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 部门简介</a></li>
-                        <li><a href="../department/index"><i class="fa fa-circle-o"></i> 信息维护</a></li>
+                        <li><a href="../department/index"><i class="fa fa-circle-o"></i> 部门简介</a></li>
+                        <li><a href="../department/editPage"><i class="fa fa-circle-o"></i> 信息维护</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -92,7 +97,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../staff/index"><i class="fa fa-circle-o"></i> 信息管理</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Excel导入/导出</a></li>
+                        <li><a href="../staff/excelImport"><i class="fa fa-circle-o"></i> Excel导入/导出</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -116,6 +121,93 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                部门管理
+                <small>Department</small>
+            </h1>
+            <ol class="breadcrumb">
+
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-2 col-xs-2">
+                    <!-- small box -->
+                </div>
+                <g:each in="${deparments}">
+                    <div class="col-lg-4 col-xs-4">
+                        <div class="small-box" style="background: ${it?.background}">
+                            <div class="inner">
+                                <h3>${it?.department?.name}</h3>
+                                <p>共${it?.staffCount}人</p>
+                            </div>
+                            <div class="icon">
+                                <i class="${it?.icon}"></i>
+                            </div>
+                            <a class="small-box-footer" onclick="showDetail('${it?.department?.name}','${it?.department?.simpleName}','${it?.department?.staffInCharge?.staffBasic?.name}','${it?.department?.upperDepartment?.name}','${it?.department?.departmentCode}','${it?.background}')">
+                                详情信息<i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <g:if test="${it?.index==1||it?.index=='1'}">
+                        <div class="col-lg-2 col-xs-2">
+                            <!-- small box -->
+                        </div>
+                    </g:if>
+                </g:each>
+            </div>
+
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="codeHidden" value="${deparments[0]?.department?.departmentCode}" hidden>
+                    <!-- general form elements -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">部门详情</h3>
+                            <button type="submit" class="btn btn-primary pull-right" onclick="edit()">编辑</button>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Widget: user widget style 1 -->
+                                <div class="box box-widget widget-user-2">
+                                    <!-- Add the bg color to the header using any of the bg-* classes -->
+                                    <div class="widget-user-header"  id="headerColor" style="background: ${deparments[0]?.background}">
+                                        <div class="widget-user-image">
+                                            <img class="img-circle" src="${resource(dir: 'assets/images',file: 'mayun.jpg')}" alt="User Avatar">
+                                        </div>
+                                        <!-- /.widget-user-image -->
+                                        <h3 class="widget-user-username" id="departmentName">&nbsp;&nbsp;&nbsp;${deparments[0]?.department?.name}</h3>
+                                        <h5 class="widget-user-desc" id="department_code">&nbsp;&nbsp;&nbsp;Board Members</h5>
+                                    </div>
+                                    <div class="box-footer no-padding">
+                                        <ul class="nav nav-stacked">
+                                            <li><a href="">部门简称<span id="departmentSimpleName" style="font-size: 17px; margin-left: 10ex">${deparments[0]?.department?.simpleName}</span></a></li>
+                                            <li><a href="#">部门主管<span id="staffInCharge" style="font-size: 17px; margin-left: 10ex">${deparments[0]?.department?.staffInCharge?.staffBasic?.name}</span></a></li>
+                                            <li><a href="">上级部门<span id="upper" style="font-size: 17px; margin-left: 10ex">${deparments[0]?.department?.upperDepartment?.name}</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /.widget-user -->
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    %{--<div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -778,7 +870,7 @@
         <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
-    </div>
+    </div>--}%
     <!-- ./wrapper -->
     <asset:javascript src="jquery-2.2.0.min.js" />
     <!-- jQuery UI 1.11.4 -->
@@ -789,15 +881,26 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
-    <asset:javascript src="jquery-2.2.0.min.js" />
     <asset:javascript src="bootstrap.min.js" />
+    <asset:javascript src="raphael/raphael.min.js" />
+    <asset:javascript src="morris.js/morris.min.js" />
+    <asset:javascript src="jquery-sparkline/dist/jquery.sparkline.min.js" />
+    <asset:javascript src="jvectormap/jquery-jvectormap-1.2.2.min.js" />
+    <asset:javascript src="jvectormap/jquery-jvectormap-world-mill-en.js" />
+    <asset:javascript src="jquery-knob/dist/jquery.knob.min.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.date.extensions.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.extensions.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.js" />
+    <asset:javascript src="moment/min/moment.min.js" />
+    <asset:javascript src="bootstrap-daterangepicker/daterangepicker.js" />
+    <asset:javascript src="bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" />
     <asset:javascript src="jquery-slimscroll/jquery.slimscroll.min.js" />
     <asset:javascript src="fastclick/lib/fastclick.js" />
     <asset:javascript src="dist/js/adminlte.min.js" />
     <asset:javascript src="dist/js/demo.js" />
-    <asset:javascript src="datatables.net-bs/js/dataTables.bootstrap.min.js" />
-    <asset:javascript src="datatables.net/js/jquery.dataTables.min.js" />
-
+    <asset:javascript src="timepicker/bootstrap-timepicker.min.js" />
+    <asset:javascript src="iCheck/icheck.min.js" />
 </body>
 <script>
     $('#example1').DataTable()
@@ -808,6 +911,23 @@
         'ordering'    : true,
         'info'        : true,
         'autoWidth'   : false
-    })
+    });
+
+
+    function showDetail(departmentName,simpleName,staffInCharge,upper,code,background){
+       console.log(departmentName+" "+simpleName+" "+staffInCharge+" "+upper+" "+code);
+       document.getElementById("departmentName").innerHTML="&nbsp;&nbsp;&nbsp;"+departmentName;
+       document.getElementById("departmentSimpleName").innerHTML=simpleName;
+       document.getElementById("staffInCharge").innerHTML=staffInCharge;
+       document.getElementById("upper").innerHTML=upper;
+       $('#codeHidden').val(code);
+       document.getElementById("headerColor").style.background=background;
+    }
+
+    function edit(){
+        var code = $('#codeHidden').val();
+        console.log("code :"+code);
+        window.location.href="../department/editPage?code="+code;
+    }
 </script>
 </html>
