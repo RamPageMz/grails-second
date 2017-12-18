@@ -87,6 +87,26 @@ class DepartmentController {
         render(template: "/${namespace}/${params.controller}/searchList", model: [searchList: staffList])
     }
 
+    def createTemple(){
+        println("searchPage:${params}")
+
+        def staffList=Staff.createCriteria().list {
+            if (params.departmentCode) {
+                eq('department_number', params.departmentCode)
+            }
+            if (params.staffNumber) {
+                like('staff_number', "%${params.staffNumber}%")
+            }
+            if (params.name) {
+                staffBasic {
+                    like('name', "%${params.name}%")
+                }
+            }
+        }
+
+        render(template: "/${namespace}/${params.controller}/createList", model: [searchList: staffList,departID:params.createID])
+    }
+
     def saveCharge(){
         println("saveCharge:${params}")
 
@@ -102,6 +122,32 @@ class DepartmentController {
         render result as JSON
     }
 
+    def createPage(){
+        println("createPage:")
+
+        [departmentList:Department.all]
+    }
+
+    def createNewDepartment(){
+        println("createNewDepartment:${params}")
+
+        def codeString="CND"+(new Random().nextInt(1000)).toString()
+        println("code:${codeString}")
+
+        def department=new Department()
+        department.departmentCode=codeString
+        department.name=params.name
+        department.simpleName=params.simpleName
+        if (params.upperCode!=""){
+            department.upperDepartment=Department.findByDepartmentCode(params.upperCode)
+        }
+
+        departmentService.save(department)
+
+        def result = ["backCode": "1", "message": "设置成功","postID":Department.findByDepartmentCode(codeString).id]
+
+        render result as JSON
+    }
     /**
      *  Method Name : showAllList
      *  Description : 显示所有的部门信息 包括上级信息

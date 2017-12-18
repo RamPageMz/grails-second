@@ -128,7 +128,7 @@
                 <small>Department</small>
             </h1>
             <ol class="breadcrumb">
-
+                <button type="button" class="btn btn-block btn-info" onclick="window.location.href='../department/createPage'">新建部门</button>
             </ol>
         </section>
 
