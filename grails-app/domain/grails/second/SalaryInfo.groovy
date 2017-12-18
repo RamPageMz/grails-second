@@ -51,7 +51,7 @@ class SalaryInfo {
         salaryYear nullable: true
         salaryMonth nullable: true
         salaryStatus nullable: true
-        salary_name nullable: true
+        staff_name nullable: true
         salary_base nullable: true
         salary_post nullable: true
         salary_compensation nullable: true
