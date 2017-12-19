@@ -1,3 +1,4 @@
+<%@ page import="javax.servlet.ServletContext" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,6 +130,27 @@
         <!-- section-main -->
         <!-- Main content -->
         <section class="content">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <i class="fa fa-search"></i>
+
+                    <h3 class="box-title">上传照片</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="file" class="form-control" id="thumbnail" name="thumbnail">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <!-- Small boxes (Stat box) -->
             <div class="box box-default">
                 <div class="box-header with-border">
@@ -145,376 +167,340 @@
                 <div class="box-body">
                     <div class="row">
                         <form id="basicForm">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>姓名</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>姓名</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="name" class="form-control" id="basic_name" name="basic_name" placeholder="Enter name">
                                     </div>
-                                    <input type="text" class="form-control" id="basic_name" name="basic_name">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>部门</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-sitemap"></i>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>性别</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_sex" name="basic_sex">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <option value="1">男</option>
+                                            <option value="0">女</option>
+                                        </select>
                                     </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_deparment"  name="basic_deparment">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${departmentList}">
-                                            <option value="${it?.departmentCode}">${it?.name}</option>
-                                        </g:each>
-                                    </select>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>职务</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label >出生日期</label>
+                                    <div class="input-group">
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-street-view"></i>
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_birth" name="basic_birth" value="">
                                     </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_duty" name="basic_duty">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${dutyList}">
-                                            <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                        </g:each>
-                                    </select>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>入职时间</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>身份证号</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_card" name="basic_card" placeholder="id">
                                     </div>
-                                    <input type="text" class="form-control" id="basic_hireTime" name="basic_hireTime" value="">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>性别</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label >手机号码</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_mobilePhone" name="basic_mobilePhone" value="" placeholder="Enter mobilePhone">
                                     </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_sex" name="basic_sex">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <option value="1">男</option>
-                                        <option value="0">女</option>
-                                    </select>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>籍贯</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label >民族</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_race" name="basic_race" value="" placeholder="民族">
                                     </div>
-                                    %{--todo 地区级联选择--}%
-                                    <input type="text" class="form-control" id="basic_origin" name="basic_origin">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>民族</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>籍贯</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_origin" name="basic_origin" placeholder="Enter Native place">
                                     </div>
-                                    %{--todo 民族选择--}%
-                                    <input type="text" class="form-control" id="basic_race" name="basic_race">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>出生日期</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="basic_birthday" name="basic_birthday" value="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>婚姻状况</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_marriage" name="basic_marriage">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${sysCodeList}">%{--从sysCode中取值--}%
-                                            <g:if test="${it?.type == 'marriage'}">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>户籍类别</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_householdType" name="basic_householdType">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <g:each in="${grails.second.SysCode.findAllByType('household')}">%{--从sysCode中取值--}%
                                                 <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                            </g:if>
-                                        </g:each>
-                                    </select>
+                                            </g:each>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>政治面貌</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>是否有上海居住证</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_haveShang" name="basic_haveShang">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <option value="0">没有</option>
+                                            <option value="1">有</option>
+                                        </select>
                                     </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_politic" name="basic_politic">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${sysCodeList}">%{--从sysCode中取值--}%
-                                            <g:if test="${it?.type == 'politic'}">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>有效期</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_validityTime" name="basic_validityTime" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>政治面貌</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_politic" name="basic_politic">
+                                            <option selected="selected" value="">--请选择政治面貌--</option>
+                                            <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
                                                 <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                            </g:if>
-                                        </g:each>
-                                    </select>
+                                            </g:each>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>健康状况</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>教育程度</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_health" name="basic_health">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${sysCodeList}">%{--从sysCode中取值--}%
-                                            <g:if test="${it?.type == 'health'}">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_education" name="basic_education">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <g:each in="${grails.second.SysCode.findAllByType('education')}">%{--从sysCode中取值--}%
                                                 <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                            </g:if>
-                                        </g:each>
-                                    </select>
+                                            </g:each>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>教育程度</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>健康状况</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_education" name="basic_education">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${sysCodeList}">%{--从sysCode中取值--}%
-                                            <g:if test="${it?.type == 'education'}">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_health" name="basic_health">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <g:each in="${grails.second.SysCode.findAllByType('health')}">%{--从sysCode中取值--}%
                                                 <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                            </g:if>
-                                        </g:each>
-                                    </select>
+                                            </g:each>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>毕业时间</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>婚姻状况</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="basic_graduationTime" name="basic_graduationTime" value="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>学习专业</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="basic_major" name="basic_major" value="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>职称</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="basic_proTitle" name="basic_proTitle" value="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>户籍</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="basic_household" name="basic_household" value="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>身份证</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="basic_identitycard" name="basic_identitycard" value="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>户籍类别</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_householdType" name="basic_householdType">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${sysCodeList}">%{--从sysCode中取值--}%
-                                            <g:if test="${it?.type == 'household'}">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_marriage" name="basic_marriage">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <g:each in="${grails.second.SysCode.findAllByType('marriage')}">%{--从sysCode中取值--}%
                                                 <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                            </g:if>
-                                        </g:each>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>是否有上海居住证</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                            </g:each>
+                                        </select>
                                     </div>
-                                    <select class="form-control select2" style="width: 100%;" id="basic_haveShang" name="basic_haveShang">
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <option value="0">没有</option>
-                                        <option value="1">有</option>
-                                    </select>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>有效期</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>学习专业</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_major" name="basic_major" value="">
                                     </div>
-                                    <input type="text" class="form-control" id="basic_validityTime" name="basic_validityTime" value="">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>本地住址</label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>毕业时间</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_graduationTime" name="basic_graduationTime" value="">
                                     </div>
-                                    <input type="text" class="form-control" id="basic_localAddress" name="basic_localAddress" value="">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>邮编</label>
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>职称</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_proTitle" name="basic_proTitle" value="">
                                     </div>
-                                    <input type="text" class="form-control" id="basic_zipCode" name="basic_zipCode" value="">
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>部门</label>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>手机</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-sitemap"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_departmentCode"  name="basic_departmentCode">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <g:each in="${grails.second.Department.all}">
+                                                <option value="${it?.departmentCode}">${it?.name}</option>
+                                            </g:each>
+                                        </select>
                                     </div>
-                                    <input type="text" class="form-control" id="basic_mobilePhone" name="basic_mobilePhone" value="">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>住宅电话</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>工作职务</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <select class="form-control select2" style="width: 100%;" id="basic_duty"  name="basic_duty">
+                                            <option selected="selected" value="">--请选择--</option>
+                                            <g:each in="${grails.second.DutyCode.all}">
+                                                <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                            </g:each>
+                                        </select>
                                     </div>
-                                    <input type="text" class="form-control" id="basic_homePhone" name="basic_homePhone" value="">
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-block btn-info col-lg-offset-6" onclick="saveBasic()">保存</button>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>入职时间</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_hireTime" name="basic_hireTime" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>本地住址</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_localAddress" name="basic_localAddress" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>邮编</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_zipCode" name="basic_zipCode" value="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>住宅电话</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <input type="text" class="form-control" id="basic_homePhone" name="basic_homePhone" value="">
+                                    </div>
+                                </div>
+                            </div>
 
                         </form>
                         <!-- /.col -->
@@ -522,6 +508,9 @@
                     <!-- /.row -->
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer">
+                    <button class="btn btn-primary" onclick="saveBasic()">保存</button>
+                </div>
             </div>
             <!-- /.row (main row) -->
 
@@ -538,11 +527,12 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    <form id="homeForm">
                     <form id="familyForm" name="familyForm">
                     %{--<div class="row">--}%
                     <div id="loverDiv">
 
-                        <g:uploadForm action="saveFile" method="post">
+                       %{-- <g:uploadForm action="saveFile" method="post">
                             <input type="file" id="fileLoad" name="fileLoad"/>
                             <input type="submit" value="sub" />
                         </g:uploadForm>
@@ -550,7 +540,7 @@
                             <input type="file" name="myFile" />
                             <input type="submit" value="上&nbsp;&nbsp;&nbsp;传" />
                         </g:form>
-                        <button onclick="saveFile()">upload</button>
+                        <button onclick="saveFile()">upload</button>--}%
                     <!-- /.col -->
                         <strong><i class="fa  fa-venus-double"></i>&nbsp;配偶信息</strong><i class="fa  fa-plus-square-o" style="margin-left: 20px;" onclick="showLoverDiv()"></i>
                         <div id="loverDetail" style="margin-top: 10px;display: none;">
@@ -662,95 +652,181 @@
                         <strong><i class="fa  fa-venus-double"></i> 家庭信息</strong><i class="fa  fa-plus-square-o" style="margin-left: 20px;" onclick="addFamily()"></i>
                         <div id="familyFrame" >
                             <div id="familyDetail" style="margin-top: 10px;">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_appellation1" name="family_appellation1" value="父亲" placeholder="称谓" disabled>
                                                 </div>
-                                                <input type="text" class="form-control" id="family_appellation" name="family_appellation" value="" placeholder="称谓">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_name1" name="family_name1" value="" placeholder="姓名">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_birth1" name="family_birth1" value="" placeholder="出生日期">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_workUnit1" name="family_workUnit1" value="" placeholder="工作单位">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_duty1" name="family_duty1" value="" placeholder="工作职务">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <select class="form-control select2" style="width: 100%;" id="family_politic1" name="family_politic1">
+                                                        <option selected="selected" value="">--请选择政治面貌--</option>
+                                                        <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
+                                                            <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                        </g:each>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_phone1" name="family_phone1" value="" placeholder="联系方式">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
+                                    <div class="row" style="margin-top: 15px;">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_appellation2" name="family_appellation2" value="母亲" placeholder="称谓" disabled>
                                                 </div>
-                                                <input type="text" class="form-control" id="family_name" name="family_name" value="" placeholder="姓名">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_name2" name="family_name2" value="" placeholder="姓名">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_birth2" name="family_birth2" value="" placeholder="出生日期">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_workUnit2" name="family_workUnit2" value="" placeholder="工作单位">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_duty2" name="family_duty2" value="" placeholder="工作职务">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <select class="form-control select2" style="width: 100%;" id="family_politic2" name="family_politic2">
+                                                        <option selected="selected" value="">--请选择政治面貌--</option>
+                                                        <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
+                                                            <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                        </g:each>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="family_phone2" name="family_phone2" value="" placeholder="联系方式">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" hidden>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-user"></i>
+                                                    </div>
+                                                    <input type="text" hidden class="form-control" id="staffNumberHidden" name="staffNumberHidden" value="" placeholder="">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
-                                                </div>
-                                                <input type="text" class="form-control" id="family_birth" name="family_birth" value="" placeholder="出生日期">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
-                                                </div>
-                                                <input type="text" class="form-control" id="family_workUnit" name="family_workUnit" value="" placeholder="工作单位">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
-                                                </div>
-                                                <input type="text" class="form-control" id="family_duty" name="family_duty" value="" placeholder="工作职务">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
-                                                </div>
-                                                <select class="form-control select2" style="width: 100%;" id="family_politic" name="family_politic">
-                                                    <option selected="selected" value="">--请选择政治面貌--</option>
-                                                    <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
-                                                        <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                                    </g:each>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-user"></i>
-                                                </div>
-                                                <input type="text" class="form-control" id="family_phone" name="family_phone" value="" placeholder="联系方式">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
                     </form>
-                <div class="col-md-6">
-                    <button type="button" class="btn btn-block btn-info col-lg-offset-6" onclick="saveFamily()">保存</button>
-                </div>
-                        <!-- /.col -->
-                    %{--</div>--}%
-                    <!-- /.row -->
+                    </form>
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer">
+                    <button class="btn btn-primary" onclick="saveHome()">保存</button>
+                </div>
             </div>
 
             <div class="box box-default">
@@ -765,89 +841,198 @@
                     </div>
                 </div>
                 <!-- /.box-header -->
+                <form id="studyForm">
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>姓名</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="search_name">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>工号</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-info-circle"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="search_number">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>部门</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-sitemap"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="search_deparment">
-                                        <!--TODO 数据库选取部门列表-->
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${departmentList}">
-                                            <option value="${it?.departmentCode}">${it?.name}</option>
-                                        </g:each>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>职务</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-street-view"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="search_duty">
-                                        <!--TODO 数据库选取职务列表-->
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${dutyList}">
-                                            <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                        </g:each>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>入职时间</label>
-
+                                <label>起止时间</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" id="config-demo" class="form-control">
+                                    <input type="text" id="study_date1" name="study_date1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>学校</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_school1" name="study_school1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>专业</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_major1" name="study_major1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>职务</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_duty1" name="study_duty1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>证明人</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_man1" name="study_man1">
                                 </div>
                             </div>
                         </div>
                         <!-- /.col -->
                     </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>起止时间</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="study_date2" name="study_date2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>学校</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_school2" name="study_school2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>专业</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_major2" name="study_major2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>职务</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_duty2" name="study_duty2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>证明人</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_man2" name="study_man2">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>起止时间</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="study_date3" name="study_date3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>学校</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_school3" name="study_school3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>专业</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_major3" name="study_major3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>职务</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_duty3" name="study_duty3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>证明人</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="study_man3" name="study_man3">
+                                </div>
+                            </div>
+                        </div>
+                    <!-- /.col -->
+                    </div>
                     <!-- /.row -->
                 </div>
+                </form>
                 <!-- /.box-body -->
+                <div class="box-footer">
+                    <button class="btn btn-primary" onclick="saveStudy()">保存</button>
+                </div>
             </div>
 
             <div class="box box-default">
@@ -866,77 +1051,181 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>姓名</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="search_name">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>工号</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-info-circle"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="search_number">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>部门</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-sitemap"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="search_deparment">
-                                        <!--TODO 数据库选取部门列表-->
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${departmentList}">
-                                            <option value="${it?.departmentCode}">${it?.name}</option>
-                                        </g:each>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>职务</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-street-view"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="search_duty">
-                                        <!--TODO 数据库选取职务列表-->
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${dutyList}">
-                                            <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                        </g:each>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>入职时间</label>
-
+                                <label>起止时间</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" id="config-demo" class="form-control">
+                                    <input type="text" id="work_date1" name="work_date1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>工作单位</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_unit1" name="work_unit1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>部门</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_department1" name="work_department1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>职务</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_duty1" name="work_duty1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>证明人</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_man1" name="work_man1">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>起止时间</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="work_date2" name="work_date2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>工作单位</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_unit2" name="work_unit2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>部门</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_department2" name="work_department2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>职务</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_duty2" name="work_duty2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>证明人</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_man2" name="work_man2">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>起止时间</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="work_date3" name="work_date3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>工作单位</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_unit3" name="work_unit3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>部门</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_department3" name="work_department3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>职务</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_duty3" name="work_duty3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>证明人</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="work_man3" name="work_man3">
                                 </div>
                             </div>
                         </div>
@@ -945,6 +1234,9 @@
                     <!-- /.row -->
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary" onclick="saveWork()">保存</button>
+                </div>
             </div>
 
             <div class="box box-default">
@@ -963,77 +1255,145 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>姓名</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="search_name">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>工号</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-info-circle"></i>
-                                    </div>
-                                    <input type="text" class="form-control" id="search_number">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>部门</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-sitemap"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="search_deparment">
-                                        <!--TODO 数据库选取部门列表-->
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${departmentList}">
-                                            <option value="${it?.departmentCode}">${it?.name}</option>
-                                        </g:each>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>职务</label>
-
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-street-view"></i>
-                                    </div>
-                                    <select class="form-control select2" style="width: 100%;" id="search_duty">
-                                        <!--TODO 数据库选取职务列表-->
-                                        <option selected="selected" value="">--请选择--</option>
-                                        <g:each in="${dutyList}">
-                                            <option value="${it?.codeKey}">${it?.codeValue}</option>
-                                        </g:each>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>入职时间</label>
-
+                                <label>获奖时间</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" id="config-demo" class="form-control">
+                                    <input type="text" id="score_date1" name="score_date1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>奖惩情况</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_info1" name="score_info1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>奖惩等级</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_level1" name="score_level1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>奖惩单位</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_unit1" name="score_unit1">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>获奖时间</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="score_date2" name="score_date2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>奖惩情况</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_info2" name="score_info2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>奖惩等级</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_level2" name="score_level2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>奖惩单位</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_unit2" name="score_unit2">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>获奖时间</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="score_date3" name="score_date3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>奖惩情况</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-info-circle"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_info3" name="score_info3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label>奖惩等级</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-sitemap"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_level3" name="score_level3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>奖惩单位</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-street-view"></i>
+                                    </div>
+                                    <input type="text" class="form-control" id="score_unit3" name="score_unit3">
                                 </div>
                             </div>
                         </div>
@@ -1042,6 +1402,9 @@
                     <!-- /.row -->
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer">
+                    <button class="btn btn-primary" onclick="saveScore()">保存</button>
+                </div>
             </div>
 
             <div id="detailTemplate">
@@ -1282,6 +1645,25 @@
     <script>
         var startDate;
         var endDate;
+        var staffNumber;
+
+        var study1_start;
+        var study2_start;
+        var study3_start;
+        var study1_end;
+        var study2_end;
+        var study3_end;
+
+        var work1_start;
+        var work2_start;
+        var work3_start;
+        var work1_end;
+        var work2_end;
+        var work3_end;
+
+        var scoreDate1;
+        var scoreDate2;
+        var scoreDate3;
 
         $(document).ready(function () {
             $('#basic_hireTime').daterangepicker({
@@ -1289,7 +1671,7 @@
                 startDate: moment()
             });
 
-            $('#basic_birthday').daterangepicker({
+            $('#basic_birth').daterangepicker({
                 singleDatePicker: true,
                 startDate: moment()
             });
@@ -1309,6 +1691,29 @@
                 startDate: moment()
             });
 
+            $('#family_birth1').daterangepicker({
+                singleDatePicker: true,
+                startDate: moment()
+            });
+
+            $('#family_birth2').daterangepicker({
+                singleDatePicker: true,
+                startDate: moment()
+            });
+
+            $('#score_date1').daterangepicker({
+                singleDatePicker: true,
+                startDate: moment()
+            });
+            $('#score_date2').daterangepicker({
+                singleDatePicker: true,
+                startDate: moment()
+            });
+            $('#score_date3').daterangepicker({
+                singleDatePicker: true,
+                startDate: moment()
+            });
+
             $("input[name='family_birth']").each(
                 function(){
                     $(this).daterangepicker({
@@ -1318,12 +1723,57 @@
                 });
 
 
-            $('#config-demo').daterangepicker({
+            $('#study_date1').daterangepicker({
                 "startDate": "11/25/2017",
                 "endDate": "12/01/2017"
             }, function (start, end, label) {
-                startDate = start.format('YYYY-MM-DD');
-                endDate = end.format('YYYY-MM-DD');
+                study1_start = start.format('YYYY-MM-DD');
+                study1_end = end.format('YYYY-MM-DD');
+                console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
+            });
+
+            $('#study_date2').daterangepicker({
+                "startDate": "11/25/2017",
+                "endDate": "12/01/2017"
+            }, function (start, end, label) {
+                study2_start = start.format('YYYY-MM-DD');
+                study2_end = end.format('YYYY-MM-DD');
+                console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
+            });
+
+            $('#study_date3').daterangepicker({
+                "startDate": "11/25/2017",
+                "endDate": "12/01/2017"
+            }, function (start, end, label) {
+                study3_start = start.format('YYYY-MM-DD');
+                study3_end = end.format('YYYY-MM-DD');
+                console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
+            });
+
+            $('#work_date1').daterangepicker({
+                "startDate": "11/25/2017",
+                "endDate": "12/01/2017"
+            }, function (start, end, label) {
+                work1_start = start.format('YYYY-MM-DD');
+                work1_end = end.format('YYYY-MM-DD');
+                console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
+            });
+
+            $('#work_date2').daterangepicker({
+                "startDate": "11/25/2017",
+                "endDate": "12/01/2017"
+            }, function (start, end, label) {
+                work2_start = start.format('YYYY-MM-DD');
+                work2_end = end.format('YYYY-MM-DD');
+                console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
+            });
+
+            $('#work_date3').daterangepicker({
+                "startDate": "11/25/2017",
+                "endDate": "12/01/2017"
+            }, function (start, end, label) {
+                work3_start = start.format('YYYY-MM-DD');
+                work3_end = end.format('YYYY-MM-DD');
                 console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
             });
         });
@@ -1398,56 +1848,75 @@
             })
         })
 
-        function searchInfo() {
-            var name = $("#search_name").val();
-            var number = $("#search_number").val();
-            var duty = $("#search_duty").val();
-            var department = $("#search_deparment").val();
-
-            $.post("/staff/searchPage", {
-                name: name,
-                duty: duty,
-                departmentCode: department,
-                staffNumber: number,
-                hireTime1: startDate,
-                hireTime2: endDate
-            }, function (data) {
-                $("#searchTemplate").html(data);
-            }, "html");
-        }
-
         function saveBasic() {
-            console.log("saveBasic...");
-            console.log($('#basicForm').serializeArray());
-            $.each($('#basicForm').serializeArray(), function(i, field){
-                console.log(field.name + ":" + field.value + " ");
-            });
-            /*$.post("/staff/saveFile",$('#basicForm').serializeArray(), function(data) {
-                console.log(data.backMessage)
-            }, "json");*/
-        }
-
-        function addFamily(){
-            console.log("addFamily");
-            $("#familyFrame").append($("#familyDetail").clone());
-        }
-
-        function showLoverDiv(){
-            console.log("showLoverDiv");
-            document.getElementById("loverDetail").style.display="";
-        }
-
-        function saveFamily(){
-            console.log("saveFamily...");
-            console.log($('#familyForm').serializeArray());
-        }
-
-        function saveFile(){
-            $.post("/staff/saveFile",$('#fileLoad').val(), function(data) {
-                console.log(data.backMessage)
+            $.post("/staff/createBasic",$("#basicForm").serializeArray(), function(data) {
+                alert(data.backMessage);
+                staffNumber=data.staffNumber;
+                $("#staffNumberHidden").val(staffNumber);
+                console.log("staffNumber:"+staffNumber);
             }, "json");
         }
 
+        function showLoverDiv() {
+            document.getElementById("loverDetail").style.display="";
+        }
+        
+        function saveHome() {
+            console.log("staffNumber:"+staffNumber);
+            $.post("/staff/createHome",$("#homeForm").serializeArray(), function(data) {
+                alert(data.backMessage);
+            }, "json");
+        }
+        
+        function saveStudy() {
+            $.post("/staff/saveStudy",{
+                study1_start:study1_start,study1_end:study1_end,study2_start:study2_start,study2_end:study2_end,study3_start:study3_start,study3_end:study3_end,
+                study_school1:$('#study_school1').val(),study_major1:$('#study_major1').val(),study_duty1:$('#study_duty1').val(),study_man1:$("#study_man1").val(),
+                study_school2:$('#study_school2').val(),study_major2:$('#study_major2').val(),study_duty2:$('#study_duty2').val(),study_man2:$("#study_man2").val(),
+                study_school3:$('#study_school3').val(),study_major3:$('#study_major3').val(),study_duty3:$('#study_duty3').val(),study_man3:$("#study_man3").val()
+            }, function(data) {
+                alert(data.backMessage);
+            }, "json");
+        }
+
+        function saveWork() {
+            $.post("/staff/saveWork",{
+                work1_start:work1_start,work1_end:work1_end,work2_start:work2_start,work2_end:work2_end,work3_start:work3_start,work3_end:work3_end,
+                work_unit1:$('#work_unit1').val(),work_department1:$("#work_department1").val(),work_duty1:$("#work_duty1").val(),work_man1:$("#work_man1").val(),
+                work_unit2:$('#work_unit2').val(),work_department2:$("#work_department2").val(),work_duty2:$("#work_duty2").val(),work_man2:$("#work_man2").val(),
+                work_unit3:$('#work_unit3').val(),work_department3:$("#work_department3").val(),work_duty3:$("#work_duty3").val(),work_man3:$("#work_man3").val()
+            }, function(data) {
+                alert(data.backMessage);
+            }, "json");
+        }
+
+        function saveScore() {
+            $.post("/staff/saveScore",{
+                score_date1:$("#score_date1").val(),score_date2:$("#score_date2").val(),score_date3:$("#score_date3").val(),
+                score_info1:$('#score_info1').val(),score_level1:$("#score_level1").val(),score_unit1:$("#score_unit1").val(),
+                score_info2:$('#score_info2').val(),score_level2:$("#score_level2").val(),score_unit2:$("#score_unit2").val(),
+                score_info3:$('#score_info3').val(),score_level3:$("#score_level3").val(),score_unit3:$("#score_unit3").val()
+            }, function(data) {
+                alert(data.backMessage);
+            }, "json");
+        }
+
+        function getObjectURL(file) {
+            var url = null ;
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
+
+        $('#thumbnail').change(function() {
+            var eImg = $('<img />');
+            eImg.attr('src', getObjectURL($(this)[0].files[0])); // 或 this.files[0] this->input
+            $(this).after(eImg);});
 
     </script>
 </body>

@@ -28,16 +28,17 @@ class StaffHome {//员工家庭信息
         createUser nullable: true
         updateUser nullable: true
 
-        name nullable: false
+        name nullable: true
         birthday nullable: true
         origin nullable: true
-        race nullable: false
+        race nullable: true
         degree nullable: true
-        politic nullable: false
+        politic nullable: true
         workUnit nullable: true
         duty nullable: true
-        phone nullable: false
+        phone nullable: true
         appellation nullable: true
-        lover nullable: false
+        lover nullable: true
+        stage nullable: true
     }
 }

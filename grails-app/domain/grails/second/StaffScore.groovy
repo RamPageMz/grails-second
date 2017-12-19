@@ -21,10 +21,10 @@ class StaffScore {//员工业绩信息
         createUser nullable: true
         updateUser nullable: true
 
-        scoreTime nullable: false
-        scoreInfo nullable: false
+        scoreTime nullable: true
+        scoreInfo nullable: true
         scoreLevel nullable: true
-        workUnit nullable: false
-        stage nullable: false
+        workUnit nullable: true
+        stage nullable: true
     }
 }

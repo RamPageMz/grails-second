@@ -22,10 +22,11 @@ class StaffWork {//员工工作信息
         createUser nullable: true
         updateUser nullable: true
 
-        timeInterval nullable: false
-        workUnit nullable: false
+        timeInterval nullable: true
+        workUnit nullable: true
         department nullable: true
         duty nullable: true
         reference nullable: true
+        stage nullable: true
     }
 }
