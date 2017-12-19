@@ -17,7 +17,7 @@ class TestDomainActionController {
     def index() {
         println("test Domain action ...")
 
-        def filePath="I:\\file\\exceltest\\test.xlsx"
+        /*def filePath="I:\\file\\exceltest\\test.xlsx"
         DecimalFormat decimalFormat=new DecimalFormat("#.#")
 
         File file=new File(filePath)
@@ -40,7 +40,7 @@ class TestDomainActionController {
             }
             println("**********")
         }
-        println(XSSFCell.CELL_TYPE_NUMERIC)
+        println(XSSFCell.CELL_TYPE_NUMERIC)*/
 
 
         /*createDepartment('A01',"A市场部")

@@ -1,4 +1,4 @@
-<%@ page import="javax.servlet.ServletContext" %>
+<%@ page import="java.text.SimpleDateFormat; javax.servlet.ServletContext" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -200,7 +200,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="name" class="form-control" id="basic_name" name="basic_name" placeholder="Enter name">
+                                        <input type="name" class="form-control" id="basic_name" name="basic_name" value="${staff?.staffBasic.name}" placeholder="Enter name">
                                     </div>
                                 </div>
                             </div>
@@ -213,9 +213,15 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_sex" name="basic_sex">
-                                            <option selected="selected" value="">--请选择--</option>
-                                            <option value="1">男</option>
-                                            <option value="0">女</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
+                                            <g:if test="${staff?.staffBasic.sex=='1'||staff?.staffBasic.sex==1}">
+                                                <option selected value="1">男</option>
+                                                <option value="0">女</option>
+                                            </g:if>
+                                            <g:else>
+                                            <option selected value="0">女</option>
+                                                <option value="1">男</option>
+                                            </g:else>
                                         </select>
                                     </div>
                                 </div>
@@ -229,7 +235,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_birth" name="basic_birth" value="">
+                                        <input type="text" class="form-control" id="basic_birth" name="basic_birth" value="${staff?.staffBasic?.birthday}">
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +247,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_card" name="basic_card" placeholder="id">
+                                        <input type="text" class="form-control" id="basic_card" name="basic_card" placeholder="id" value="${staff?.staffBasic?.identityCard}">
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +260,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_mobilePhone" name="basic_mobilePhone" value="" placeholder="Enter mobilePhone">
+                                        <input type="text" class="form-control" id="basic_mobilePhone" name="basic_mobilePhone" value="${staff?.staffBasic?.mobilePhone}" placeholder="Enter mobilePhone">
                                     </div>
                                 </div>
                             </div>
@@ -266,7 +272,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_race" name="basic_race" value="" placeholder="民族">
+                                        <input type="text" class="form-control" id="basic_race" name="basic_race" value="${staff?.staffBasic?.race}" placeholder="民族">
                                     </div>
                                 </div>
                             </div>
@@ -278,7 +284,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_origin" name="basic_origin" placeholder="Enter Native place">
+                                        <input type="text" class="form-control" id="basic_origin" name="basic_origin" value="${staff?.staffBasic?.origin}" placeholder="Enter Native place">
                                     </div>
                                 </div>
                             </div>
@@ -291,9 +297,14 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_householdType" name="basic_householdType">
-                                            <option selected="selected" value="">--请选择--</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
                                             <g:each in="${grails.second.SysCode.findAllByType('household')}">%{--从sysCode中取值--}%
-                                                <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                <g:if test="${staff?.staffBasic?.householdType==it?.codeKey}">
+                                                <option selected value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:else>
                                             </g:each>
                                         </select>
                                     </div>
@@ -309,9 +320,15 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_haveShang" name="basic_haveShang">
-                                            <option selected="selected" value="">--请选择--</option>
-                                            <option value="0">没有</option>
-                                            <option value="1">有</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
+                                            <g:if test="${staff?.staffBasic?.havaShang==0||staff?.staffBasic?.havaShang=='0'}">
+                                            <option selected value="0">没有</option>
+                                                <option value="1">有</option>
+                                            </g:if>
+                                            <g:else>
+                                            <option selected value="1">有</option>
+                                                <option value="0">没有</option>
+                                            </g:else>
                                         </select>
                                     </div>
                                 </div>
@@ -325,7 +342,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_validityTime" name="basic_validityTime" value="">
+                                        <input type="text" class="form-control" id="basic_validityTime" name="basic_validityTime" value="${staff?.staffBasic?.validityTime}">
                                     </div>
                                 </div>
                             </div>
@@ -339,9 +356,14 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_politic" name="basic_politic">
-                                            <option selected="selected" value="">--请选择政治面貌--</option>
+                                            %{--<option selected="selected" value="">--请选择政治面貌--</option>--}%
                                             <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
-                                                <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                <g:if test="${staff?.staffBasic?.politic==it?.codeKey}">
+                                                <option selected value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:else>
                                             </g:each>
                                         </select>
                                     </div>
@@ -357,9 +379,14 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_education" name="basic_education">
-                                            <option selected="selected" value="">--请选择--</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
                                             <g:each in="${grails.second.SysCode.findAllByType('education')}">%{--从sysCode中取值--}%
-                                                <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                <g:if test="${staff?.staffBasic?.education==it?.codeKey}">
+                                                <option selected value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:else>
                                             </g:each>
                                         </select>
                                     </div>
@@ -375,9 +402,14 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_health" name="basic_health">
-                                            <option selected="selected" value="">--请选择--</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
                                             <g:each in="${grails.second.SysCode.findAllByType('health')}">%{--从sysCode中取值--}%
-                                                <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                <g:if test="${staff?.staffBasic?.health==it?.codeKey}">
+                                                <option selected value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:else>
                                             </g:each>
                                         </select>
                                     </div>
@@ -393,9 +425,14 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_marriage" name="basic_marriage">
-                                            <option selected="selected" value="">--请选择--</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
                                             <g:each in="${grails.second.SysCode.findAllByType('marriage')}">%{--从sysCode中取值--}%
-                                                <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                <g:if test="${staff?.staffBasic?.marriage==it?.codeKey}">
+                                                <option selected value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:else>
                                             </g:each>
                                         </select>
                                     </div>
@@ -410,7 +447,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_major" name="basic_major" value="">
+                                        <input type="text" class="form-control" id="basic_major" name="basic_major" value="${staff?.staffBasic?.major}">
                                     </div>
                                 </div>
                             </div>
@@ -437,7 +474,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_proTitle" name="basic_proTitle" value="">
+                                        <input type="text" class="form-control" id="basic_proTitle" name="basic_proTitle" value="${staff?.staffBasic?.proTitle}">
                                     </div>
                                 </div>
                             </div>
@@ -450,9 +487,14 @@
                                             <i class="fa fa-sitemap"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_departmentCode"  name="basic_departmentCode">
-                                            <option selected="selected" value="">--请选择--</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
                                             <g:each in="${grails.second.Department.all}">
-                                                <option value="${it?.departmentCode}">${it?.name}</option>
+                                                <g:if test="${staff?.department_number==it?.departmentCode}">
+                                                <option selected value="${it?.departmentCode}">${it?.name}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it?.departmentCode}">${it?.name}</option>
+                                                </g:else>
                                             </g:each>
                                         </select>
                                     </div>
@@ -467,9 +509,14 @@
                                             <i class="fa fa-user"></i>
                                         </div>
                                         <select class="form-control select2" style="width: 100%;" id="basic_duty"  name="basic_duty">
-                                            <option selected="selected" value="">--请选择--</option>
+                                            %{--<option selected="selected" value="">--请选择--</option>--}%
                                             <g:each in="${grails.second.DutyCode.all}">
-                                                <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                <g:if test="${staff?.duty==it?.codeKey}">
+                                                <option selected value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it?.codeKey}">${it?.codeValue}</option>
+                                                </g:else>
                                             </g:each>
                                         </select>
                                     </div>
@@ -497,7 +544,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_localAddress" name="basic_localAddress" value="">
+                                        <input type="text" class="form-control" id="basic_localAddress" name="basic_localAddress" value="${staff?.staffBasic?.localAddress}">
                                     </div>
                                 </div>
                             </div>
@@ -510,7 +557,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_zipCode" name="basic_zipCode" value="">
+                                        <input type="text" class="form-control" id="basic_zipCode" name="basic_zipCode" value="${staff?.staffBasic?.zipCode}">
                                     </div>
                                 </div>
                             </div>
@@ -523,9 +570,12 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-user"></i>
                                         </div>
-                                        <input type="text" class="form-control" id="basic_homePhone" name="basic_homePhone" value="">
+                                        <input type="text" class="form-control" id="basic_homePhone" name="basic_homePhone" value="${staff?.staffBasic?.homePhone}">
                                     </div>
                                 </div>
+                            </div>
+                            <div hidden>
+                                <input type="text" hidden name="staffNumber" value="${staff?.staff_number}">
                             </div>
 
                         </form>
@@ -540,7 +590,7 @@
             </div>
             <!-- /.row (main row) -->
 
-            <div class="box box-default">
+            %{--<div class="box box-default">
                 <div class="box-header with-border">
                     <i class="fa fa-search"></i>
 
@@ -555,10 +605,10 @@
                 <div class="box-body">
                     <form id="homeForm">
                         <form id="familyForm" name="familyForm">
-                            %{--<div class="row">--}%
+                            --}%%{--<div class="row">--}%%{--
                             <div id="loverDiv">
 
-                                %{-- <g:uploadForm action="saveFile" method="post">
+                                --}%%{-- <g:uploadForm action="saveFile" method="post">
                                      <input type="file" id="fileLoad" name="fileLoad"/>
                                      <input type="submit" value="sub" />
                                  </g:uploadForm>
@@ -566,7 +616,7 @@
                                      <input type="file" name="myFile" />
                                      <input type="submit" value="上&nbsp;&nbsp;&nbsp;传" />
                                  </g:form>
-                                 <button onclick="saveFile()">upload</button>--}%
+                                 <button onclick="saveFile()">upload</button>--}%%{--
                                 <!-- /.col -->
                                 <strong><i class="fa  fa-venus-double"></i>&nbsp;配偶信息</strong><i class="fa  fa-plus-square-o" style="margin-left: 20px;" onclick="showLoverDiv()"></i>
                                 <div id="loverDetail" style="margin-top: 10px;display: none;">
@@ -639,7 +689,7 @@
                                                     </div>
                                                     <select class="form-control select2" style="width: 100%;" id="family_lover_politic" name="family_lover_politic">
                                                         <option selected="selected" value="">--请选择政治面貌--</option>
-                                                        <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
+                                                        <g:each in="${grails.second.SysCode.findAllByType('politic')}">--}%%{--从sysCode中取值--}%%{--
                                                             <option value="${it?.codeKey}">${it?.codeValue}</option>
                                                         </g:each>
                                                     </select>
@@ -654,7 +704,7 @@
                                                     </div>
                                                     <select class="form-control select2" style="width: 100%;" id="family_lover_degree" name="family_lover_degree">
                                                         <option selected="selected" value="">--请选择学位--</option>
-                                                        <g:each in="${grails.second.SysCode.findAllByType('degree')}">%{--从sysCode中取值--}%
+                                                        <g:each in="${grails.second.SysCode.findAllByType('degree')}">--}%%{--从sysCode中取值--}%%{--
                                                             <option value="${it?.codeKey}">${it?.codeValue}</option>
                                                         </g:each>
                                                     </select>
@@ -738,7 +788,7 @@
                                                         </div>
                                                         <select class="form-control select2" style="width: 100%;" id="family_politic1" name="family_politic1">
                                                             <option selected="selected" value="">--请选择政治面貌--</option>
-                                                            <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
+                                                            <g:each in="${grails.second.SysCode.findAllByType('politic')}">--}%%{--从sysCode中取值--}%%{--
                                                                 <option value="${it?.codeKey}">${it?.codeValue}</option>
                                                             </g:each>
                                                         </select>
@@ -815,7 +865,7 @@
                                                         </div>
                                                         <select class="form-control select2" style="width: 100%;" id="family_politic2" name="family_politic2">
                                                             <option selected="selected" value="">--请选择政治面貌--</option>
-                                                            <g:each in="${grails.second.SysCode.findAllByType('politic')}">%{--从sysCode中取值--}%
+                                                            <g:each in="${grails.second.SysCode.findAllByType('politic')}">--}%%{--从sysCode中取值--}%%{--
                                                                 <option value="${it?.codeKey}">${it?.codeValue}</option>
                                                             </g:each>
                                                         </select>
@@ -1431,7 +1481,7 @@
                 <div class="box-footer">
                     <button class="btn btn-primary" onclick="saveScore()">保存</button>
                 </div>
-            </div>
+            </div>--}%
 
             <div id="detailTemplate">
 
@@ -1690,11 +1740,13 @@
         var scoreDate1;
         var scoreDate2;
         var scoreDate3;
-
+        <%
+            java.text.SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy")
+        %>
         $(document).ready(function () {
             $('#basic_hireTime').daterangepicker({
                 singleDatePicker: true,
-                startDate: moment()
+                startDate: "${sdf.format(staff?.staffBasic?.hireTime)}"
             });
 
             $('#basic_birth').daterangepicker({
@@ -1704,7 +1756,7 @@
 
             $('#basic_graduationTime').daterangepicker({
                 singleDatePicker: true,
-                startDate: moment()
+                startDate: "${sdf.format(staff?.staffBasic?.graduationTime)}"
             });
 
             $('#basic_validityTime').daterangepicker({
@@ -1875,11 +1927,8 @@
         })
 
         function saveBasic() {
-            $.post("/staff/createBasic",$("#basicForm").serializeArray(), function(data) {
+            $.post("/staff/updateBasic",$("#basicForm").serializeArray(), function(data) {
                 alert(data.backMessage);
-                staffNumber=data.staffNumber;
-                $("#staffNumberHidden").val(staffNumber);
-                console.log("staffNumber:"+staffNumber);
             }, "json");
         }
 

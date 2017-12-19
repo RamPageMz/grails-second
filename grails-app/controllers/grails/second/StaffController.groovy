@@ -680,6 +680,64 @@ class StaffController {
         render result as JSON
     }
 
+    def updateBasic(){
+        println("updateBasic:${params}")
+
+        def staff = Staff.findByStaff_number(params.staffNumber)
+        def staffBasic = staff.staffBasic
+
+        staffBasic.name = params.basic_name
+        if (params?.basic_sex!="")
+            staffBasic.sex = Integer.parseInt(params?.basic_sex)
+
+        staffBasic.birthday = params.basic_birth
+        staffBasic.identityCard = params.basic_card
+        staffBasic.mobilePhone = params.basic_mobilePhone
+        staffBasic.race = params.basic_race
+        staffBasic.origin = params.basic_origin
+        if (params.basic_householdType!="")
+            staffBasic.householdType = Integer.parseInt(params.basic_householdType)
+
+        if (params.basic_haveShang!="")
+            staffBasic.havaShang = Integer.parseInt(params.basic_haveShang)
+
+        staffBasic.validityTime = params.basic_validityTime
+        if (params.basic_politic!="")
+            staffBasic.politic = Integer.parseInt(params.basic_politic)
+
+        if (params.basic_education!="")
+            staffBasic.education = Integer.parseInt(params.basic_education)
+
+        if (params.basic_health!="")
+            staffBasic.health = Integer.parseInt(params.basic_health)
+
+        if (params.basic_marriage!="")
+            staffBasic.marriage = Integer.parseInt(params.basic_marriage)
+
+        staffBasic.major = params.basic_major
+        if (params.basic_graduationTime!="")
+            staffBasic.graduationTime = sdf.parse(params.basic_graduationTime)
+
+        staffBasic.proTitle = params.basic_proTitle
+        staff.department_number = params.basic_departmentCode
+        staff.department = Department.findByDepartmentCode(params.basic_departmentCode)
+        staff.duty = params.basic_duty
+        if (params.basic_hireTime!="")
+            staffBasic.hireTime = sdf.parse(params.basic_hireTime)
+
+        staffBasic.localAddress = params.basic_localAddress
+        staffBasic.zipCode = params.basic_zipCode
+        staffBasic.homePhone = params.basic_homePhone
+
+        staffBasicService.save(staffBasic)
+        staff.staffBasic = staffBasic
+        staffService.save(staff)
+
+        def result = ["backCode": "1", "backMessage": "更新成功!"]
+
+        render result as JSON
+    }
+
     /**
      *  Method Name : showAllStaffList
      *  Description : 显示所有的员工  暂定为员工编号排序

@@ -109,7 +109,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 批量处理</a></li>
+                        <li><a href="../salaryInfo/index"><i class="fa fa-circle-o"></i> 批量处理</a></li>
                         <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 定时发放</a></li>
                     </ul>
                 </li>
