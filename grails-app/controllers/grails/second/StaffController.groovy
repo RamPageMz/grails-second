@@ -22,6 +22,7 @@ class StaffController {
     def staffStudyService
     def staffWorkService
     def staffScoreService
+    def pictureService
 
     def staffNumberSave
 
@@ -132,7 +133,7 @@ class StaffController {
         println("work:" + staffWork)
 
         render(template: "/${namespace}/${params.controller}/detail",
-                model: [staff      : staff, staffDuty: DutyCode.findByCodeKey(staff.duty).codeValue,
+                model: [staff      : staff, staffDuty: DutyCode?.findByCodeKey(staff?.duty)?.codeValue , headImage:Picture?.findByStaffNumberAndPriority(staff.staff_number,1)?.pictureUrl,
                         staffAttach: staffAttach, staffBasic: staffBasic, staffContract: staffContract,
                         staffHome  : staffHome, staffScore: staffScore, staffStudy: staffStudy, staffWork: staffWork])
     }
@@ -140,7 +141,7 @@ class StaffController {
     def createStaff() {
         println("createStaff:")
 
-        [photo:"photo1.png"]
+        [photo:"photo1.png","filename":params.filename]
     }
 
     def saveFile() {
@@ -355,26 +356,44 @@ class StaffController {
 
         staff.staff_number = staffNumber
         staffBasic.name = params.basic_name
-        staffBasic.sex = Integer.parseInt(params?.basic_sex)
+        if (params?.basic_sex!="")
+            staffBasic.sex = Integer.parseInt(params?.basic_sex)
+
         staffBasic.birthday = params.basic_birth
         staffBasic.identityCard = params.basic_card
         staffBasic.mobilePhone = params.basic_mobilePhone
         staffBasic.race = params.basic_race
         staffBasic.origin = params.basic_origin
-        staffBasic.householdType = Integer.parseInt(params.basic_householdType)
-        staffBasic.havaShang = Integer.parseInt(params.basic_haveShang)
+        if (params.basic_householdType!="")
+            staffBasic.householdType = Integer.parseInt(params.basic_householdType)
+
+        if (params.basic_haveShang!="")
+            staffBasic.havaShang = Integer.parseInt(params.basic_haveShang)
+
         staffBasic.validityTime = params.basic_validityTime
-        staffBasic.politic = Integer.parseInt(params.basic_politic)
-        staffBasic.education = Integer.parseInt(params.basic_education)
-        staffBasic.health = Integer.parseInt(params.basic_health)
-        staffBasic.marriage = Integer.parseInt(params.basic_marriage)
+        if (params.basic_politic!="")
+            staffBasic.politic = Integer.parseInt(params.basic_politic)
+
+        if (params.basic_education!="")
+            staffBasic.education = Integer.parseInt(params.basic_education)
+
+        if (params.basic_health!="")
+            staffBasic.health = Integer.parseInt(params.basic_health)
+
+        if (params.basic_marriage!="")
+            staffBasic.marriage = Integer.parseInt(params.basic_marriage)
+
         staffBasic.major = params.basic_major
-        staffBasic.graduationTime = sdf.parse(params.basic_graduationTime)
+        if (params.basic_graduationTime!="")
+            staffBasic.graduationTime = sdf.parse(params.basic_graduationTime)
+
         staffBasic.proTitle = params.basic_proTitle
         staff.department_number = params.basic_departmentCode
         staff.department = Department.findByDepartmentCode(params.basic_departmentCode)
         staff.duty = params.basic_duty
-        staffBasic.hireTime = sdf.parse(params.basic_hireTime)
+        if (params.basic_hireTime!="")
+            staffBasic.hireTime = sdf.parse(params.basic_hireTime)
+
         staffBasic.localAddress = params.basic_localAddress
         staffBasic.zipCode = params.basic_zipCode
         staffBasic.homePhone = params.basic_homePhone
@@ -406,8 +425,12 @@ class StaffController {
                 home.race=params.family_lover_race
                 home.workUnit=params.family_lover_workUnit
                 home.duty=params.family_lover_duty
-                home.politic=Integer.parseInt(params.family_lover_politic)
-                home.degree=Integer.parseInt(params.family_lover_degree)
+                if (params.family_lover_politic!="")
+                    home.politic=Integer.parseInt(params.family_lover_politic)
+
+                if (params.family_lover_degree!="")
+                    home.degree=Integer.parseInt(params.family_lover_degree)
+
                 home.phone=params.family_lover_phone
 
                 staffHomeService.save(home)
@@ -423,7 +446,9 @@ class StaffController {
                 home.birthday=params.family_birth1
                 home.workUnit=params.family_workUnit1
                 home.duty=params.family_duty1
-                home.politic=Integer.parseInt(params.family_politic1)
+                if (params.family_politic1!="")
+                    home.politic=Integer.parseInt(params.family_politic1)
+
                 home.phone=params.family_phone1
 
                 staffHomeService.save(home)
@@ -439,7 +464,9 @@ class StaffController {
                 home.birthday=params.family_birth2
                 home.workUnit=params.family_workUnit2
                 home.duty=params.family_duty2
-                home.politic=Integer.parseInt(params.family_politic2)
+                if (params.family_politic2!="")
+                    home.politic=Integer.parseInt(params.family_politic2)
+
                 home.phone=params.family_phone2
 
                 staffHomeService.save(home)
@@ -601,6 +628,54 @@ class StaffController {
         }
 
         def result = ["backCode": "1", "backMessage": "保存成功!"]
+
+        render result as JSON
+    }
+
+    def savePicture(){
+        println("savePicture:")
+
+        def url = params.myFile
+        println(url)
+
+        def f = request.getFile('myFile')
+        if (!f.empty) {
+            def myDir = servletContext.getRealPath("/")
+            def userDir = new File(myDir, "/image/")
+            userDir.mkdirs()
+            f.transferTo(new File(userDir, f.originalFilename))
+
+            def picture=new Picture()
+            picture.pictureUrl=f.originalFilename
+            picture.staffNumber=params.staffNumber
+
+            pictureService.save(picture)
+        }
+
+        println("uploadFile success!")
+
+        redirect(action: "update", params: [staffNumber: params.staffNumber])
+
+    }
+
+    def update(){
+        println("update:${params}")
+
+        def staff=Staff.findByStaff_number(params.staffNumber)
+
+        println("staff:${staff.id}")
+
+        [staff:staff,pictureList:Picture.findAllByStaffNumber(params.staffNumber)]
+    }
+
+    def setPicture(){
+        println("setPicture:${params}")
+
+        def picture=Picture.get(params.pictureID)
+        picture.priority=1
+        pictureService.save(picture)
+
+        def result = ["backCode": "1", "backMessage": "已设置成头像!"]
 
         render result as JSON
     }
