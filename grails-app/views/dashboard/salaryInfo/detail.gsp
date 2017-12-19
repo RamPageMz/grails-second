@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>人事管理-首页</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <asset:stylesheet src="bootstrap/dist/css/bootstrap.min.css"/>
+    <asset:stylesheet src="bootstrap/dist/css/bootstrap.min.css" />
     <asset:stylesheet src="font-awesome/css/font-awesome.min.css"/>
-    <asset:stylesheet src="Ionicons/css/ionicons.min.css"/>
-    <asset:stylesheet src="dist/css/AdminLTE.min.css"/>
-    <asset:stylesheet src="dist/css/skins/_all-skins.min.css"/>
-    <asset:stylesheet src="bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"/>
-    <asset:stylesheet src="bootstrap-daterangepicker/daterangepicker.css"/>
-    <asset:stylesheet src="bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"/>
-    <asset:stylesheet src="timepicker/bootstrap-timepicker.css"/>
-    <asset:stylesheet src="iCheck/all.css"/>
-    <asset:stylesheet src="select2/dist/css/select2.min.css"/>
+    <asset:stylesheet src="Ionicons/css/ionicons.min.css" />
+    <asset:stylesheet src="dist/css/AdminLTE.min.css" />
+    <asset:stylesheet src="dist/css/skins/_all-skins.min.css" />
+    <asset:stylesheet src="bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" />
+    <asset:stylesheet src="bootstrap-daterangepicker/daterangepicker.css" />
+    <asset:stylesheet src="bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" />
+    <asset:stylesheet src="timepicker/bootstrap-timepicker.css" />
+    <asset:stylesheet src="iCheck/all.css" />
+    <asset:stylesheet src="select2/dist/css/select2.min.css" />
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -50,8 +50,7 @@
             <div class="user-panel">
                 <div class="pull-left image">
                     <!-- TODO 将下面的图片替换为user的头像 -->
-                    <img src="${resource(dir: 'assets/images', file: 'userImage.jpg')}" class="img-circle"
-                         alt="User Image">
+                    <img src="${resource(dir: 'assets/images',file: 'userImage.jpg')}" class="img-circle" alt="User Image">
                 </div>
 
                 <div class="pull-left info">
@@ -111,7 +110,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="../salaryInfo/index"><i class="fa fa-circle-o"></i> 批量处理</a></li>
-                        <li><a href="../salaryInfo/detail"><i class="fa fa-circle-o"></i> 薪酬查询</a></li>
+                        <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 定时发放</a></li>
                     </ul>
                 </li>
                 <li><a href=""><i class="fa fa-calendar"></i> <span>日程安排</span></a></li>
@@ -124,287 +123,26 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-
+            %{--<h1>
+                Dashboard
+                <small>Control panel</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>--}%
         </section>
 
         <!-- section-main -->
         <!-- Main content -->
         <section class="content">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <i class="fa fa-spinner"></i>
-
-                            <h3 class="box-title">工资设定</h3>
-                        </div>
-
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>基本工资</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_base" name="salary_base"
-                                                   value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>岗位工资</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_post" name="salary_post"
-                                                   value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>补差工资</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_compensation"
-                                                   name="salary_compensation" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>司龄工资</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_seniority"
-                                                   name="salary_seniority" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>独子工资</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_singleton"
-                                                   name="salary_singleton" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>其他工资</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_otherItem"
-                                                   name="salary_otherItem" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>奖励</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_bonus"
-                                                   name="salary_bonus" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>扣减</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_minus"
-                                                   name="salary_minus" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-info" onclick="setAllGet()">工资总额：￥&nbsp;&nbsp;<a
-                                    id="allGet"></a></button>
-                        </div>
-                    </div>
-
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <i class="fa fa-spinner"></i>
-
-                            <h3 class="box-title">扣除项目</h3>
-                        </div>
-
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>养老金</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_pension"
-                                                   name="salary_pension" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>医疗金</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_medical"
-                                                   name="salary_medical" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>失业金</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_unemployment"
-                                                   name="salary_unemployment" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>公积金</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_accumulationFund"
-                                                   name="salary_accumulationFund" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>补缴</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_supplementaryPayment"
-                                                   name="salary_supplementaryPayment" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>应税工资</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_taxbaleOay"
-                                                   name="salary_taxbaleOay" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>个调税</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_taxAdjustment"
-                                                   name="salary_taxAdjustment" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>工会费</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-user"></i>
-                                            </div>
-                                            <input type="text" class="form-control" id="salary_union"
-                                                   name="salary_union" value="0">
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="box-footer">
-                            <button type="submit" class="btn btn-info" onclick="setAllMinus()">扣除总额：￥&nbsp;&nbsp;<a
-                                    id="allMinus"></a></button>
-                        </div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.col (right) -->
-            </div>
-
             <div class="box box-default">
                 <div class="box-header with-border">
                     <i class="fa fa-search"></i>
-
                     <h3 class="box-title">员工搜索</h3>
-
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <!-- /.box-header -->
@@ -413,7 +151,6 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>姓名</label>
-
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-user"></i>
@@ -422,11 +159,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>工号</label>
-
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-info-circle"></i>
@@ -435,11 +170,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>部门</label>
-
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-sitemap"></i>
@@ -454,11 +187,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>职务</label>
-
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-street-view"></i>
@@ -473,11 +204,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>入职时间</label>
-
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
@@ -486,18 +215,14 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-4 ">
                             <div class="form-group">
                                 <label></label>
-
                                 <div class="input-group col-md-5 col-md-offset-3" style="margin-top: 5px;">
-                                    <button type="button" class="btn btn-block btn-info"
-                                            onclick="searchInfo()">查询</button>
+                                    <button type="button" class="btn btn-block btn-info" onclick="searchInfo()">查询</button>
                                 </div>
                             </div>
                         </div>
-
                         <!-- /.col -->
                     </div>
 
@@ -512,12 +237,14 @@
                     <div class="box box-default">
                         <div class="box-header with-border">
                             <i class="fa fa-spinner"></i>
-
                             <h3 class="box-title">搜索结果</h3>
                         </div>
-
                         <div id="searchTemplate">
-
+                            <div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <h4><i class="icon fa fa-info"></i> Alert!</h4>
+                                查询结果将在此显示...
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-body -->
@@ -529,6 +256,19 @@
 
             </div>
 
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <i class="fa fa-search"></i>
+                    <h3 class="box-title">薪酬详情</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div id="salaryInfoList">
+
+                </div>
+            </div>
         </section>
         <!-- /.content -->
         <!-- /.content-wrapper -->
@@ -714,8 +454,7 @@
                         <div class="form-group">
                             <label class="control-sidebar-subheading">
                                 Delete chat history
-                                <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i>
-                                </a>
+                                <a href="javascript:void(0)" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
                             </label>
                         </div>
                         <!-- /.form-group -->
@@ -730,48 +469,48 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-    <asset:javascript src="jquery-2.2.0.min.js"/>
+    <asset:javascript src="jquery-2.2.0.min.js" />
     <!-- jQuery UI 1.11.4 -->
     %{--<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>--}%
-    <asset:javascript src="jquery-ui/jquery-ui.min.js"/>
+    <asset:javascript src="jquery-ui/jquery-ui.min.js" />
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <asset:javascript src="Chart.min.js"/>
+    <asset:javascript src="Chart.min.js" />
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
-    <asset:javascript src="bootstrap.min.js"/>
-    <asset:javascript src="raphael/raphael.min.js"/>
-    <asset:javascript src="morris.js/morris.min.js"/>
-    <asset:javascript src="jquery-sparkline/dist/jquery.sparkline.min.js"/>
-    <asset:javascript src="jvectormap/jquery-jvectormap-1.2.2.min.js"/>
-    <asset:javascript src="jvectormap/jquery-jvectormap-world-mill-en.js"/>
-    <asset:javascript src="jquery-knob/dist/jquery.knob.min.js"/>
-    <asset:javascript src="input-mask/jquery.inputmask.js"/>
-    <asset:javascript src="input-mask/jquery.inputmask.date.extensions.js"/>
-    <asset:javascript src="input-mask/jquery.inputmask.extensions.js"/>
-    <asset:javascript src="input-mask/jquery.inputmask.js"/>
-    <asset:javascript src="moment/min/moment.min.js"/>
-    <asset:javascript src="bootstrap-daterangepicker/daterangepicker.js"/>
-    <asset:javascript src="bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"/>
-    <asset:javascript src="jquery-slimscroll/jquery.slimscroll.min.js"/>
-    <asset:javascript src="fastclick/lib/fastclick.js"/>
-    <asset:javascript src="dist/js/adminlte.min.js"/>
-    <asset:javascript src="dist/js/demo.js"/>
-    <asset:javascript src="timepicker/bootstrap-timepicker.min.js"/>
-    <asset:javascript src="iCheck/icheck.min.js"/>
+    <asset:javascript src="bootstrap.min.js" />
+    <asset:javascript src="raphael/raphael.min.js" />
+    <asset:javascript src="morris.js/morris.min.js" />
+    <asset:javascript src="jquery-sparkline/dist/jquery.sparkline.min.js" />
+    <asset:javascript src="jvectormap/jquery-jvectormap-1.2.2.min.js" />
+    <asset:javascript src="jvectormap/jquery-jvectormap-world-mill-en.js" />
+    <asset:javascript src="jquery-knob/dist/jquery.knob.min.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.date.extensions.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.extensions.js" />
+    <asset:javascript src="input-mask/jquery.inputmask.js" />
+    <asset:javascript src="moment/min/moment.min.js" />
+    <asset:javascript src="bootstrap-daterangepicker/daterangepicker.js" />
+    <asset:javascript src="bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" />
+    <asset:javascript src="jquery-slimscroll/jquery.slimscroll.min.js" />
+    <asset:javascript src="fastclick/lib/fastclick.js" />
+    <asset:javascript src="dist/js/adminlte.min.js" />
+    <asset:javascript src="dist/js/demo.js" />
+    <asset:javascript src="timepicker/bootstrap-timepicker.min.js" />
+    <asset:javascript src="iCheck/icheck.min.js" />
 
     <script>
         var startDate;
         var endDate;
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#config-demo').daterangepicker({
                 "startDate": "11/25/2017",
                 "endDate": "12/01/2017"
-            }, function (start, end, label) {
-                startDate = start.format('YYYY-MM-DD');
-                endDate = end.format('YYYY-MM-DD');
-                console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD'));
+            }, function(start, end, label) {
+                startDate=start.format('YYYY-MM-DD');
+                endDate=end.format('YYYY-MM-DD');
+                console.log(start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD') );
             });
         });
 
@@ -780,33 +519,29 @@
             $('.select2').select2()
 
             //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', {'placeholder': 'dd/mm/yyyy'})
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
             //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', {'placeholder': 'mm/dd/yyyy'})
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
             //Money Euro
             $('[data-mask]').inputmask()
 
             //Date range picker
             $('#reservation').daterangepicker()
             //Date range picker with time picker
-            $('#reservationtime').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                format: 'MM/DD/YYYY h:mm A'
-            })
+            $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
             //Date range as a button
             $('#daterange-btn').daterangepicker(
                 {
-                    ranges: {
-                        'Today': [moment(), moment()],
-                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    ranges   : {
+                        'Today'       : [moment(), moment()],
+                        'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
                     },
                     startDate: moment().subtract(29, 'days'),
-                    endDate: moment()
+                    endDate  : moment()
                 },
                 function (start, end) {
                     $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
@@ -821,17 +556,17 @@
             //iCheck for checkbox and radio inputs
             $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
                 checkboxClass: 'icheckbox_minimal-blue',
-                radioClass: 'iradio_minimal-blue'
+                radioClass   : 'iradio_minimal-blue'
             })
             //Red color scheme for iCheck
             $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
                 checkboxClass: 'icheckbox_minimal-red',
-                radioClass: 'iradio_minimal-red'
+                radioClass   : 'iradio_minimal-red'
             })
             //Flat red color scheme for iCheck
             $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
                 checkboxClass: 'icheckbox_flat-green',
-                radioClass: 'iradio_flat-green'
+                radioClass   : 'iradio_flat-green'
             })
 
             //Colorpicker
@@ -845,49 +580,13 @@
             })
         })
 
-        function setAllGet() {
-            var salary_base = parseFloat($("#salary_base").val());
-            var salary_post = parseFloat($("#salary_post").val());
-            var salary_compensation = parseFloat($("#salary_compensation").val());
-            var salary_seniority = parseFloat($("#salary_seniority").val());
-            var salary_singleton = parseFloat($("#salary_singleton").val());
-            var salary_otherItem = parseFloat($("#salary_otherItem").val());
-            var salary_bonus = parseFloat($("#salary_bonus").val());
-            var salary_minus = parseFloat($("#salary_minus").val());
-
-            console.log(salary_base + salary_post);
-
-            document.getElementById("allGet").innerHTML = salary_base + salary_post + salary_compensation + salary_seniority + salary_singleton + salary_otherItem + salary_bonus + salary_minus;
-
-        }
-
-        function setAllMinus() {
-            var salary_pension = parseFloat($("#salary_pension").val());
-            var salary_medical = parseFloat($("#salary_medical").val());
-            var salary_unemployment = parseFloat($("#salary_unemployment").val());
-            var salary_accumulationFund = parseFloat($("#salary_accumulationFund").val());
-            var salary_supplementaryPayment = parseFloat($("#salary_supplementaryPayment").val());
-            var salary_taxbaleOay = parseFloat($("#salary_taxbaleOay").val());
-            var salary_taxAdjustment = parseFloat($("#salary_taxAdjustment").val());
-            var salary_union = parseFloat($("#salary_union").val());
-
-            document.getElementById("allMinus").innerHTML = salary_pension + salary_medical + salary_unemployment + salary_accumulationFund + salary_supplementaryPayment + salary_taxbaleOay + salary_taxAdjustment + salary_union;
-        }
-
         function searchInfo() {
             var name = $("#search_name").val();
             var number = $("#search_number").val();
             var duty = $("#search_duty").val();
             var department = $("#search_deparment").val();
 
-            $.post("/salaryInfo/searchPage", {
-                name: name,
-                duty: duty,
-                departmentCode: department,
-                staffNumber: number,
-                hireTime1: startDate,
-                hireTime2: endDate
-            }, function (data) {
+            $.post("/salaryInfo/detailSearch",{name:name,duty:duty,departmentCode:department,staffNumber:number,hireTime1:startDate,hireTime2:endDate}, function(data) {
                 $("#searchTemplate").html(data);
             }, "html");
         }

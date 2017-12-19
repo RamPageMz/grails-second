@@ -96,7 +96,7 @@ class SalaryInfoController {
             salary.salary_taxAdjustment=params.salary_taxAdjustment
             salary.salary_union=params.salary_union
 
-            salary.salary_actualPay=params.allGet-params.allMinus
+            salary.salary_actualPay=Integer.parseInt(params.allGet)-Integer.parseInt(params.allMinus)
 
             salaryInfoService.save(salary)
 
@@ -107,5 +107,61 @@ class SalaryInfoController {
 
         def result = ["backCode": "1", "message": "发放成功"]
         render result as JSON
+    }
+
+    def detail(){
+
+    }
+
+    def detailSearch(){
+        println("searchPage..." + params)
+
+        Date startDate
+        Date endDate
+
+        if (params.hireTime1 && params.hireTime2) {
+            DateFormat format = new SimpleDateFormat("YYYY-MM-DD")
+            startDate = format.parse(params.hireTime1)
+            endDate = format.parse(params.hireTime2)
+        }
+
+        def staffList = Staff.createCriteria().list {
+            if (params.departmentCode) {
+                eq('department_number', params.departmentCode)
+            }
+            if (params.staffNumber) {
+                like('staff_number', "%${params.staffNumber}%")
+            }
+            if (params.duty) {
+                eq('duty', params.duty)
+            }
+            if (params.name) {
+                staffBasic {
+                    like('name', "%${params.name}%")
+                }
+            }
+            if (params.hireTime1 && params.hireTime2) {
+                staffBasic {
+                    between('hireTime', startDate, endDate)
+                }
+            }
+        }
+
+        render(template: "/${namespace}/${params.controller}/detailSearch", model: [searchList: staffList])
+    }
+
+    def showDetail(){
+        println("showDetail:${params}")
+
+        def staff=Staff.findByStaff_number(params.staffNumber)
+
+        def searchList=SalaryInfo.findAllByStaffNumber(params.staffNumber).sort { a, b ->
+                if (a.salaryTime < b.salaryTime)
+                    return 1
+                else
+                    return -1
+        }
+
+        render(template: "/${namespace}/${params.controller}/salaryInfo", model: [staff: staff,searchList: searchList])
     }
 }
